@@ -1,0 +1,96 @@
+@font-face {
+  font-family: "ClashGrotesk";
+  src: url("../src/assets/fonts/OTF/ClashGrotesk-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: 12, 165, 176; /* Teal */
+  --color-secondary: 107, 70, 193; /* Purple */
+  --color-accent: 245, 158, 11; /* Orange */
+  --color-success: 34, 197, 94; /* Green */
+  --color-warning: 245, 158, 11; /* Amber */
+  --color-error: 239, 68, 68; /* Red */
+}
+
+body {
+  font-family: "ClashGrotesk", sans-serif;
+  @apply bg-slate-50 text-slate-800;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-bold leading-tight;
+}
+
+p {
+  @apply leading-relaxed;
+}
+
+.splash-animation {
+  animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.page-transition {
+  animation: fadeInSlide 0.3s ease-out;
+}
+
+@keyframes fadeInSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn {
+  @apply rounded-lg px-4 py-2 font-medium transition duration-200 focus:outline-none focus:ring-2 focus:ring-opacity-50;
+}
+
+.btn-primary {
+  @apply bg-primary text-white hover:bg-primary/90 focus:ring-primary/50;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-white hover:bg-secondary/90 focus:ring-secondary/50;
+}
+
+.btn-accent {
+  @apply bg-accent text-white hover:bg-accent/90 focus:ring-accent/50;
+}
+
+.input-field {
+  @apply w-full rounded-lg border border-slate-300 px-4 py-2 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary;
+}
+
+.tab-active {
+  @apply border-b-2 border-primary text-primary font-medium;
+}
+
+.form-label {
+  @apply mb-1 block text-sm font-medium text-slate-700;
+}
