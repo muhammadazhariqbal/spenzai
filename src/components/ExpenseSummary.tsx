@@ -19,10 +19,10 @@ const ExpenseSummary: React.FC = () => {
   }, [categoryTotals]);
   
   return (
-    <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
-      <h2 className="text-lg font-semibold mb-3">This Month</h2>
+    <div className="bg-black rounded-lg shadow-sm p-4 mb-4">
+      <h2 className="text-lg font-semibold mb-3 text-white">This Month</h2>
       
-      <div className="text-3xl font-bold text-slate-800 mb-4">
+      <div className="text-3xl font-bold text-slate-800 mb-4 text-white">
         {formatCurrency(totalMonthlyExpense)}
       </div>
       
@@ -41,7 +41,7 @@ const ExpenseSummary: React.FC = () => {
           </div>
         </div>
       ) : (
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-white">
           No expenses recorded this month yet.
         </p>
       )}

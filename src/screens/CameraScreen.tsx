@@ -50,11 +50,11 @@ const CameraScreen: React.FC = () => {
   };
   
   return (
-    <div className="flex min-h-screen flex-col bg-slate-50 pb-16">
+    <div className="flex min-h-screen flex-col bg-white pb-16">
       <Header title="Scan Receipt" showBackButton />
       
       <main className="flex-1 p-4">
-        <div className="mb-4 rounded-lg bg-white p-4 shadow-sm">
+        <div className="mb-4 rounded-lg bg-white p-4 shadow-lg">
           <p className="mb-4 text-center text-slate-600">
             Take a photo of your receipt to automatically extract expense details
           </p>
