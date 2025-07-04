@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
-
-// Sample data (you can replace this with dynamic data)
+import sideIcon from "../assets/side-icon.png";
 const activityData = {
   Today: [
     {
@@ -17,6 +16,27 @@ const activityData = {
       type: "Payment",
       amount: "-$108.00",
       icon: "/icons/amazon.png",
+    },
+    {
+      id: 6,
+      title: "Starbucks",
+      type: "Food & Drinks",
+      amount: "-$12.00",
+      icon: "/icons/starbucks.png",
+    },
+    {
+      id: 7,
+      title: "Uber",
+      type: "Transportation",
+      amount: "-$24.50",
+      icon: "/icons/uber.png",
+    },
+    {
+      id: 8,
+      title: "Apple Music",
+      type: "Subscription",
+      amount: "-$10.99",
+      icon: "/icons/applemusic.png",
     },
   ],
   "This Week": [
@@ -34,6 +54,27 @@ const activityData = {
       amount: "-$9.99",
       icon: "/icons/spotify.png",
     },
+    {
+      id: 9,
+      title: "McDonald's",
+      type: "Food & Drinks",
+      amount: "-$18.00",
+      icon: "/icons/mcdonalds.png",
+    },
+    {
+      id: 10,
+      title: "Zara",
+      type: "Shopping",
+      amount: "-$89.00",
+      icon: "/icons/zara.png",
+    },
+    {
+      id: 11,
+      title: "PayPal",
+      type: "Transfer",
+      amount: "-$200.00",
+      icon: "/icons/paypal.png",
+    },
   ],
   "This Month": [
     {
@@ -42,6 +83,34 @@ const activityData = {
       type: "Fitness",
       amount: "-$50.00",
       icon: "/icons/gym.png",
+    },
+    {
+      id: 12,
+      title: "Electric Bill",
+      type: "Utilities",
+      amount: "-$72.00",
+      icon: "/icons/electricity.png",
+    },
+    {
+      id: 13,
+      title: "Bookstore",
+      type: "Education",
+      amount: "-$40.00",
+      icon: "/icons/bookstore.png",
+    },
+    {
+      id: 14,
+      title: "Flight Ticket",
+      type: "Travel",
+      amount: "-$320.00",
+      icon: "/icons/plane.png",
+    },
+    {
+      id: 15,
+      title: "Pharmacy",
+      type: "Health",
+      amount: "-$28.00",
+      icon: "/icons/pharmacy.png",
     },
   ],
 };
@@ -95,7 +164,7 @@ const ActivitiesSection = () => {
           >
             <div className="flex items-center space-x-3">
               <img
-                src={activity.icon}
+                src={sideIcon}
                 alt={activity.title}
                 className="w-8 h-8 rounded-md object-contain"
               />

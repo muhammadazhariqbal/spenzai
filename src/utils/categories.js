@@ -1,3 +1,14 @@
+import {
+  Utensils,
+  Car,
+  Film,
+  ShoppingBag,
+  Home,
+  Heart,
+  Plane,
+  Book,
+  MoreHorizontal,
+} from "lucide-react";
 export const CATEGORIES = [
   {
     id: "food",
@@ -21,7 +32,7 @@ export const CATEGORIES = [
     id: "shopping",
     name: "Shopping",
     icon: "ShoppingBag",
-    color: "#6A0572",
+    color: "#6A09",
   },
   {
     id: "utilities",
@@ -45,7 +56,7 @@ export const CATEGORIES = [
     id: "education",
     name: "Education",
     icon: "Book",
-    color: "#8338EC",
+    color: "#D291BC",
   },
   {
     id: "other",
@@ -68,4 +79,16 @@ export const formatCurrency = (amount) => {
     currency: "USD",
     minimumFractionDigits: 2,
   }).format(amount);
+};
+
+export const ICON_MAP = {
+  Utensils,
+  Car,
+  Film,
+  ShoppingBag,
+  Home,
+  Heart,
+  Plane,
+  Book,
+  MoreHorizontal,
 };

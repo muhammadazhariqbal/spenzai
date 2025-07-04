@@ -1,14 +1,22 @@
 import React from "react";
+import { ICON_MAP } from "../utils/categories"; // adjust path as needed
 
-const CategoryList = ({ id, name, icon, bgColor = "bg-gray-100" }) => {
+const CategoryList = ({ id, name, icon, color }) => {
+  const IconComponent = ICON_MAP[icon];
+
   return (
-    <div key={id} className="flex flex-col items-center space-y-2 w-20">
+    <div
+      key={id}
+      className="flex flex-col items-center space-y-1 w-16 shrink-0"
+    >
       <div
-        className={`w-14 h-14 rounded-xl flex items-center justify-center ${bgColor}`}
+        className="w-12 h-12 rounded-xl flex items-center justify-center"
+        style={{ backgroundColor: color }}
       >
-        {icon}
+        {IconComponent && (
+          <IconComponent size={20} className="text-slate-700" />
+        )}
       </div>
-      <span className="text-sm text-gray-600 text-center">{name}</span>
     </div>
   );
 };

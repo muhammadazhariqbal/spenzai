@@ -1,37 +1,45 @@
 import React, { useMemo } from "react";
-import { PlusCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
-import Navigation from "../../components/Navigation";
-import ExpenseSummary from "../../components/ExpenseSummary";
-import ExpenseItem from "../../components/ExpenseItem";
-import { getExpenses } from "../../utils/storage";
 import HomeHeader from "../../components/HomeHeader";
+import ExpenseSummary from "../../components/ExpenseSummary";
 import CategoryList from "../../components/CategoryList";
 import ActivitiesSection from "../../components/ActivitiesSection";
+import Navigation from "../../components/Navigation";
+import { getExpenses } from "../../utils/storage";
+import { CATEGORIES } from "../../utils/categories";
 
 const HomeScreen = () => {
   const navigate = useNavigate();
   const expenses = useMemo(() => getExpenses().slice(0, 5), []);
 
   return (
-    <div className="flex min-h-screen flex-col items-center bg-white">
-      <div className="w-full max-w-md bg-white flex flex-col pb-16 min-h-screen">
-        {/* <Header title="Expense Tracker" showMenuButton /> */}
-        <HomeHeader name="Ali" />
-
-        <main className="flex-1 p-4">
+    <div className="flex flex-col items-center bg-white min-h-screen">
+      <div className="w-full max-w-md bg-white flex flex-col min-h-screen relative">
+        {/* Header - Fixed */}
+        <div className="sticky top-0 bg-white z-10 pt-4 px-4 pb-2">
+          <HomeHeader name="Ali" />
           <ExpenseSummary />
 
-          <div className="mb-4 flex items-center">
-            <CategoryList name="CATG1" id={1} icon="" />
-            <CategoryList name="CATG2" id={2} icon="" />
-            <CategoryList name="CATG3" id={3} icon="" />
+          {/* Category Scroll */}
+          <div className="flex items-center gap-3 overflow-x-auto hide-scrollbar mt-2 pb-2">
+            {CATEGORIES.map((cat) => (
+              <CategoryList
+                key={cat.id}
+                id={cat.id}
+                name={cat.name}
+                icon={cat.icon}
+                bgColor="bg-[#F4F4F4]"
+              />
+            ))}
           </div>
+        </div>
 
+        {/* Scrollable Activities Section */}
+        <div className="flex-1 overflow-y-auto px-4 pt-2 pb-24">
           <ActivitiesSection />
-        </main>
+        </div>
 
+        {/* Fixed Navigation */}
         <Navigation />
       </div>
     </div>
