@@ -1,70 +1,69 @@
-import React, { useState, useRef } from 'react';
-import { Camera, Image, X } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
-import Navigation from '../components/Navigation';
+import React, { useState, useRef } from "react";
+import { Camera, Image, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import Navigation from "../components/Navigation";
 
-const CameraScreen: React.FC = () => {
+const CameraScreen = () => {
   const navigate = useNavigate();
-  const [capturedImage, setCapturedImage] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  
+  const [capturedImage, setCapturedImage] = useState(null);
+  const [error, setError] = useState(null);
+  const fileInputRef = useRef(null);
+
   const handleCapture = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
-  
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+  const handleFileChange = (event) => {
     const file = event.target.files?.[0];
-    
+
     if (file) {
-      if (!file.type.startsWith('image/')) {
-        setError('Please select an image file');
+      if (!file.type.startsWith("image/")) {
+        setError("Please select an image file");
         return;
       }
-      
+
       const reader = new FileReader();
       reader.onload = () => {
-        setCapturedImage(reader.result as string);
+        setCapturedImage(reader.result);
         setError(null);
       };
       reader.readAsDataURL(file);
     }
   };
-  
+
   const handleClear = () => {
     setCapturedImage(null);
     if (fileInputRef.current) {
-      fileInputRef.current.value = '';
+      fileInputRef.current.value = "";
     }
   };
-  
+
   const handleUseReceipt = () => {
     if (capturedImage) {
-      // In a real app, we would send this image for OCR processing
-      // For now, we'll just navigate to the add expense screen with the image
-      navigate('/add', { state: { receiptImage: capturedImage } });
+      navigate("/add", { state: { receiptImage: capturedImage } });
     }
   };
-  
+
   return (
     <div className="flex min-h-screen flex-col bg-white pb-16">
       <Header title="Scan Receipt" showBackButton />
-      
+
       <main className="flex-1 p-4">
         <div className="mb-4 rounded-lg bg-white p-4 shadow-lg">
           <p className="mb-4 text-center text-slate-600">
-            Take a photo of your receipt to automatically extract expense details
+            Take a photo of your receipt to automatically extract expense
+            details
           </p>
-          
+
           <div className="relative mb-4 aspect-[3/4] w-full overflow-hidden rounded-lg bg-slate-100">
             {capturedImage ? (
               <>
-                <img 
-                  src={capturedImage} 
-                  alt="Captured receipt" 
+                <img
+                  src={capturedImage}
+                  alt="Captured receipt"
                   className="h-full w-full object-cover"
                 />
                 <button
@@ -81,13 +80,13 @@ const CameraScreen: React.FC = () => {
               </div>
             )}
           </div>
-          
+
           {error && (
             <div className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-500">
               {error}
             </div>
           )}
-          
+
           <div className="flex justify-between">
             <button
               onClick={handleCapture}
@@ -96,7 +95,7 @@ const CameraScreen: React.FC = () => {
               <Camera size={20} className="mr-2" />
               Take Photo
             </button>
-            
+
             <input
               type="file"
               accept="image/*"
@@ -105,7 +104,7 @@ const CameraScreen: React.FC = () => {
               ref={fileInputRef}
               className="hidden"
             />
-            
+
             <button
               onClick={() => fileInputRef.current?.click()}
               className="flex items-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-700"
@@ -115,17 +114,14 @@ const CameraScreen: React.FC = () => {
             </button>
           </div>
         </div>
-        
+
         {capturedImage && (
-          <button
-            onClick={handleUseReceipt}
-            className="btn btn-primary w-full"
-          >
+          <button onClick={handleUseReceipt} className="btn btn-primary w-full">
             Use Receipt
           </button>
         )}
       </main>
-      
+
       <Navigation />
     </div>
   );

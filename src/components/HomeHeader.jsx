@@ -1,9 +1,7 @@
-import { Bell } from 'lucide-react'; // You can use heroicons or lucide-react
-import profileImage from '../assets/profile.jpg'; // Replace with your image path
-interface HomeHeaderProps {
-  name: string;
-}
-export default function HomeHeader({name}: HomeHeaderProps) {
+import { Bell } from "lucide-react"; // You can use heroicons or lucide-react
+import profileImage from "../assets/profile.jpg"; // Replace with your image path
+
+export default function HomeHeader({ name }) {
   return (
     <div className="flex items-center justify-between p-4 rounded-xl bg-white ">
       {/* Left: Avatar and greeting */}

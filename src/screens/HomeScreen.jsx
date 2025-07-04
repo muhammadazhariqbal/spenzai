@@ -10,7 +10,7 @@ import HomeHeader from "../components/HomeHeader";
 import CategoryList from "../components/CategoryList";
 import ActivitiesSection from "../components/ActivitiesSection";
 
-const HomeScreen: React.FC = () => {
+const HomeScreen = () => {
   const navigate = useNavigate();
   const expenses = useMemo(() => getExpenses().slice(0, 5), []);
 

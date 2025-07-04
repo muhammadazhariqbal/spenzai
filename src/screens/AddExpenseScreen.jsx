@@ -8,7 +8,7 @@ const AddExpenseScreen = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [note, setNote] = useState("");
 
-  const handlePress = (value: string) => {
+  const handlePress = (value) => {
     if (value === "delete") {
       setAmount((prev) => (prev.length > 1 ? prev.slice(0, -1) : "0"));
     } else if (value === "calendar") {
@@ -38,7 +38,6 @@ const AddExpenseScreen = () => {
     "$",
     "0",
     ".",
-  
   ];
 
   return (
@@ -98,17 +97,16 @@ const AddExpenseScreen = () => {
               key={index}
               onClick={() => handlePress(key)}
               className={`
-          flex items-center justify-center text-xl rounded-xl
-          h-16
-          ${key === "calendar" ? "bg-cyan-200" : ""}
-          ${key === "delete" ? "bg-green-200" : ""}
-          ${key === "$" ? "bg-yellow-200" : ""}
-          ${
-            key !== "calendar" && key !== "delete" && key !== "$"
-              ? "bg-gray-100"
-              : ""
-          }
-        `}
+                flex items-center justify-center text-xl rounded-xl h-16
+                ${key === "calendar" ? "bg-cyan-200" : ""}
+                ${key === "delete" ? "bg-green-200" : ""}
+                ${key === "$" ? "bg-yellow-200" : ""}
+                ${
+                  key !== "calendar" && key !== "delete" && key !== "$"
+                    ? "bg-gray-100"
+                    : ""
+                }
+              `}
             >
               {key === "delete" ? (
                 <Delete className="w-6 h-6" />

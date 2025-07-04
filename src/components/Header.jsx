@@ -2,14 +2,7 @@ import React from "react";
 import { ChevronLeft, MoreVertical } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-interface HeaderProps {
-  title: string;
-  showBackButton?: boolean;
-  showMenuButton?: boolean;
-  onMenuClick?: () => void;
-}
-
-const Header: React.FC<HeaderProps> = ({
+const Header = ({
   title,
   showBackButton = false,
   showMenuButton = false,
@@ -28,9 +21,7 @@ const Header: React.FC<HeaderProps> = ({
         </button>
       )}
 
-      <h1 className="mx-auto text-xl font-semibold text-slate-800">
-        {title}
-      </h1>
+      <h1 className="mx-auto text-xl font-semibold text-slate-800">{title}</h1>
 
       {showMenuButton && (
         <button

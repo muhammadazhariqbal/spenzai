@@ -29,7 +29,7 @@ const spentHistoryData = [
     color: "bg-purple-100",
     textColor: "text-purple-600",
   },
-   {
+  {
     icon: <CreditCard size={20} className="text-slate-700" />,
     title: "Purchase",
     date: "June 8, 2022",
@@ -63,18 +63,14 @@ const HistoryScreen = () => {
 
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
 
-  const handleSelect = (option: any) => {
+  const handleSelect = (option) => {
     setSelectedFilter(option);
     setDropdownOpen(false);
-    // Add filter logic here
   };
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownOpen(false);
       }
     };

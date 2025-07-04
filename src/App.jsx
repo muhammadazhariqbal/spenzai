@@ -4,21 +4,21 @@ import SplashScreen from "./screens/SplashScreen";
 import HomeScreen from "./screens/HomeScreen";
 import HistoryScreen from "./screens/HistoryScreen";
 import CameraScreen from "./screens/CameraScreen";
-import AddExpenseScreen  from "./screens/AddExpenseScreen";
+import AddExpenseScreen from "./screens/AddExpenseScreen";
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      // setShowSplash(false);
+      setShowSplash(false);
     }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
 
   if (showSplash) {
-    return <AddExpenseScreen />;
+    return <SplashScreen />; // ✅ Fixed this to show SplashScreen instead of AddExpenseScreen
   }
 
   return (

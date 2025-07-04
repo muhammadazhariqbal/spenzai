@@ -3,16 +3,46 @@ import { ChevronDown } from "lucide-react";
 
 // Sample data (you can replace this with dynamic data)
 const activityData = {
-  "Today": [
-    { id: 1, title: "Udemy", type: "Subscription", amount: "-$165.00", icon: "/icons/udemy.png" },
-    { id: 2, title: "Amazon", type: "Payment", amount: "-$108.00", icon: "/icons/amazon.png" },
+  Today: [
+    {
+      id: 1,
+      title: "Udemy",
+      type: "Subscription",
+      amount: "-$165.00",
+      icon: "/icons/udemy.png",
+    },
+    {
+      id: 2,
+      title: "Amazon",
+      type: "Payment",
+      amount: "-$108.00",
+      icon: "/icons/amazon.png",
+    },
   ],
   "This Week": [
-    { id: 3, title: "Netflix", type: "Subscription", amount: "-$12.99", icon: "/icons/netflix.png" },
-    { id: 4, title: "Spotify", type: "Payment", amount: "-$9.99", icon: "/icons/spotify.png" },
+    {
+      id: 3,
+      title: "Netflix",
+      type: "Subscription",
+      amount: "-$12.99",
+      icon: "/icons/netflix.png",
+    },
+    {
+      id: 4,
+      title: "Spotify",
+      type: "Payment",
+      amount: "-$9.99",
+      icon: "/icons/spotify.png",
+    },
   ],
   "This Month": [
-    { id: 5, title: "Gym", type: "Fitness", amount: "-$50.00", icon: "/icons/gym.png" },
+    {
+      id: 5,
+      title: "Gym",
+      type: "Fitness",
+      amount: "-$50.00",
+      icon: "/icons/gym.png",
+    },
   ],
 };
 
@@ -20,7 +50,7 @@ const ActivitiesSection = () => {
   const [selected, setSelected] = useState("Today");
   const [open, setOpen] = useState(false);
 
-  const handleSelect = (option: string) => {
+  const handleSelect = (option) => {
     setSelected(option);
     setOpen(false);
   };
@@ -70,11 +100,15 @@ const ActivitiesSection = () => {
                 className="w-8 h-8 rounded-md object-contain"
               />
               <div>
-                <p className="text-sm font-semibold text-black">{activity.title}</p>
+                <p className="text-sm font-semibold text-black">
+                  {activity.title}
+                </p>
                 <p className="text-xs text-gray-500">{activity.type}</p>
               </div>
             </div>
-            <p className="text-sm font-semibold text-black">{activity.amount}</p>
+            <p className="text-sm font-semibold text-black">
+              {activity.amount}
+            </p>
           </div>
         ))}
       </div>
