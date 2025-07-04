@@ -81,11 +81,15 @@ const HistoryScreen = () => {
   return (
     <div className="flex min-h-screen flex-col items-center bg-white">
       <div className="w-full max-w-md bg-white flex flex-col pb-16 min-h-screen">
-        <Header title="Spent History" showBackButton />
+        {/* Fixed Header */}
+        <div className="sticky top-0 z-20 bg-white">
+          <Header title="Spent History" showBackButton />
 
-        <main className="flex-1 px-4 pt-4">
-          {/* Custom Dropdown Filter */}
-          <div className="flex justify-center mb-4 relative" ref={dropdownRef}>
+          {/* Dropdown Filter */}
+          <div
+            className="flex justify-center px-4 py-2 relative"
+            ref={dropdownRef}
+          >
             <button
               onClick={toggleDropdown}
               className="flex items-center justify-between w-48 rounded-lg bg-[#f5f6fa] px-4 py-2 text-slate-800 font-medium shadow-sm cursor-pointer"
@@ -113,7 +117,10 @@ const HistoryScreen = () => {
               </div>
             )}
           </div>
+        </div>
 
+        {/* Scrollable Content */}
+        <main className="flex-1 overflow-y-auto px-4 pt-4">
           {/* Save This Month */}
           <div className="text-center mb-4">
             <div className="text-slate-500 text-sm mb-1">Save This Month</div>
@@ -159,7 +166,7 @@ const HistoryScreen = () => {
               {spentHistoryData.map((item, idx) => (
                 <div
                   key={idx}
-                  className={`min-w-[130px] rounded-xl p-3 shadow ${item.color} flex flex-col hide-scrollbar`}
+                  className={`min-w-[130px] rounded-xl p-3 shadow ${item.color} flex flex-col`}
                 >
                   <div className="mb-2">{item.icon}</div>
                   <div className="font-medium text-slate-800 text-sm">

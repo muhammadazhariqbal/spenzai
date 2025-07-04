@@ -16,7 +16,7 @@ const Navigation = () => {
   ];
 
   return (
-    <div className="fixed bottom-8 left-0 right-0 flex justify-center">
+    <div className="fixed bottom-3 left-0 right-0 flex justify-center">
       <nav className="w-full max-w-md flex h-16 items-center justify-around bg-white border-t border-slate-200 shadow-md px-8 mx-5 rounded-lg">
         {navItems.map((item) => (
           <button
