@@ -43,9 +43,9 @@ const Navigation = () => {
         </button>
 
         <button
-          onClick={() => navigate("/settings")}
+          onClick={() => navigate("/profile")}
           className={`flex flex-col items-center justify-center px-2 py-1 ${
-            isActive("/settings") ? "text-primary" : "text-slate-600"
+            isActive("/profile") ? "text-primary" : "text-slate-600"
           }`}
         >
           <img src={navProfile} alt="Logo" className="w-6 h-6" />
