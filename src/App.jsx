@@ -7,25 +7,11 @@ import CameraScreen from "./screens/CameraScreen";
 import AddExpenseScreen from "./screens/AddExpenseScreen";
 
 function App() {
-  const [showSplash, setShowSplash] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowSplash(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (showSplash) {
-    return <SplashScreen />; // ✅ Fixed this to show SplashScreen instead of AddExpenseScreen
-  }
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomeScreen />} />
-        <Route path="/home" element={<Navigate to="/" replace />} />
+        <Route path="/" element={<SplashScreen />} />
+        <Route path="/home" element={<HomeScreen />} />
         <Route path="/history" element={<HistoryScreen />} />
         <Route path="/camera" element={<CameraScreen />} />
         <Route path="/add" element={<AddExpenseScreen />} />

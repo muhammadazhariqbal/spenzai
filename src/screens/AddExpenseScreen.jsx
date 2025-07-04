@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Calendar, Check, ChevronLeft, Delete, Wallet } from "lucide-react";
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 const AddExpenseScreen = () => {
   const [amount, setAmount] = useState("0");
@@ -22,7 +23,7 @@ const AddExpenseScreen = () => {
       setAmount((prev) => (prev === "0" ? value : prev + value));
     }
   };
-
+  const navigate = useNavigate();
   const keys = [
     "1",
     "2",
@@ -44,7 +45,14 @@ const AddExpenseScreen = () => {
     <div className="min-h-screen bg-white p-4 max-w-sm mx-auto flex flex-col gap-6">
       {/* Header */}
       <div className="flex items-center gap-2">
-        <ChevronLeft className="w-6 h-6" />
+        <button
+          onClick={() => {
+            navigate("/home");
+          }}
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+
         <h1 className="text-lg font-semibold mx-auto">Add Expense</h1>
       </div>
 
