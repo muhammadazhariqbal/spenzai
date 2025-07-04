@@ -1,10 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Home, Clock, PlusCircle, Camera, Settings } from "lucide-react";
-import navHome from "../assets/Navhome.png";
-import navScan from "../assets/NavScan.png";
-import navChart from "../assets/Navchart.png";
-import navProfile from "../assets/Navprofile.png";
+import { Home, PlusCircle, Clock, User } from "lucide-react"; // Lucide icons
 
 const Navigation = () => {
   const location = useLocation();
@@ -12,44 +8,31 @@ const Navigation = () => {
 
   const isActive = (path) => location.pathname === path;
 
+  const navItems = [
+    { path: "/home", icon: <Home size={24} />, label: "Home" },
+    { path: "/add", icon: <PlusCircle size={24} />, label: "Add" },
+    { path: "/history", icon: <Clock size={24} />, label: "History" },
+    { path: "/profile", icon: <User size={24} />, label: "Profile" },
+  ];
+
   return (
-    <div className="fixed bottom-8 left-0 right-0 flex justify-center ">
+    <div className="fixed bottom-8 left-0 right-0 flex justify-center">
       <nav className="w-full max-w-md flex h-16 items-center justify-around bg-white border-t border-slate-200 shadow-md px-8 mx-5 rounded-lg">
-        <button
-          onClick={() => navigate("/")}
-          className={`flex flex-col items-center justify-center px-2 py-1 ${
-            isActive("/") ? "text-primary" : "text-slate-600"
-          }`}
-        >
-          <img src={navHome} alt="Logo" className="w-6 h-6" />
-        </button>
-
-        <button
-          onClick={() => navigate("/add")}
-          className={`flex flex-col items-center justify-center px-2 py-1 ${
-            isActive("/camera") ? "text-primary" : "text-slate-600"
-          }`}
-        >
-          <img src={navScan} alt="Logo" className="w-6 h-6" />
-        </button>
-
-        <button
-          onClick={() => navigate("/history")}
-          className={`flex flex-col items-center justify-center px-2 py-1 ${
-            isActive("/history") ? "text-primary" : "text-slate-600"
-          }`}
-        >
-          <img src={navChart} alt="Logo" className="w-6 h-6" />
-        </button>
-
-        <button
-          onClick={() => navigate("/profile")}
-          className={`flex flex-col items-center justify-center px-2 py-1 ${
-            isActive("/profile") ? "text-primary" : "text-slate-600"
-          }`}
-        >
-          <img src={navProfile} alt="Logo" className="w-6 h-6" />
-        </button>
+        {navItems.map((item) => (
+          <button
+            key={item.path}
+            onClick={() => navigate(item.path)}
+            className="flex flex-col items-center justify-center px-2 py-1"
+          >
+            <div
+              className={`rounded-full p-2 ${
+                isActive(item.path) ? "bg-[#F8F8F8]" : ""
+              }`}
+            >
+              {item.icon}
+            </div>
+          </button>
+        ))}
       </nav>
     </div>
   );
