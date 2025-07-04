@@ -1,14 +1,14 @@
 import React, { useMemo } from "react";
 import { PlusCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
-import Navigation from "../components/Navigation";
-import ExpenseSummary from "../components/ExpenseSummary";
-import ExpenseItem from "../components/ExpenseItem";
-import { getExpenses } from "../utils/storage";
-import HomeHeader from "../components/HomeHeader";
-import CategoryList from "../components/CategoryList";
-import ActivitiesSection from "../components/ActivitiesSection";
+import Header from "../../components/Header";
+import Navigation from "../../components/Navigation";
+import ExpenseSummary from "../../components/ExpenseSummary";
+import ExpenseItem from "../../components/ExpenseItem";
+import { getExpenses } from "../../utils/storage";
+import HomeHeader from "../../components/HomeHeader";
+import CategoryList from "../../components/CategoryList";
+import ActivitiesSection from "../../components/ActivitiesSection";
 
 const HomeScreen = () => {
   const navigate = useNavigate();

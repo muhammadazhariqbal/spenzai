@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import { Camera, Image, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
-import Navigation from "../components/Navigation";
+import Header from "../../components/Header";
+import Navigation from "../../components/Navigation";
 
 const CameraScreen = () => {
   const navigate = useNavigate();

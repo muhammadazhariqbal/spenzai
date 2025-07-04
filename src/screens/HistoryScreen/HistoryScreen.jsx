@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import Header from "../components/Header";
-import Navigation from "../components/Navigation";
+import Header from "../../components/Header";
+import Navigation from "../../components/Navigation";
 import { ChevronDown, ShoppingBag, CreditCard } from "lucide-react";
 import {
   LineChart,

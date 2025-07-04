@@ -1,7 +1,6 @@
 import React from "react";
-import headerimg from "../assets/main-logo.png";
-import topUpper from "../assets/splash-top.png";
-import sideIcon from "../assets/side-icon.png";
+import headerimg from "../../assets/main-logo.png";
+import topUpper from "../../assets/splash-top.png";
 import { useNavigate } from "react-router-dom";
 
 const SplashScreen = () => {

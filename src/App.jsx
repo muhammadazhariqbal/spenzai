@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import SplashScreen from "./screens/SplashScreen";
 import HomeScreen from "./screens/HomeScreen";
-import HistoryScreen from "./screens/HistoryScreen";
+import HistoryScreen from "./screens/HistoryScreen/HistoryScreen";
 import CameraScreen from "./screens/CameraScreen";
 import AddExpenseScreen from "./screens/AddExpenseScreen";
 
