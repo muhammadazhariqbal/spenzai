@@ -15,23 +15,25 @@ const HomeScreen = () => {
   const expenses = useMemo(() => getExpenses().slice(0, 5), []);
 
   return (
-    <div className="flex min-h-screen flex-col bg-white pb-16">
-      {/* <Header title="Expense Tracker" showMenuButton /> */}
-      <HomeHeader name="Ali" />
+    <div className="flex min-h-screen flex-col items-center bg-white">
+      <div className="w-full max-w-md bg-white flex flex-col pb-16 min-h-screen">
+        {/* <Header title="Expense Tracker" showMenuButton /> */}
+        <HomeHeader name="Ali" />
 
-      <main className="flex-1 p-4">
-        <ExpenseSummary />
+        <main className="flex-1 p-4">
+          <ExpenseSummary />
 
-        <div className="mb-4 flex items-center">
-          <CategoryList name="CATG1" id={1} icon="" />
-          <CategoryList name="CATG2" id={2} icon="" />
-          <CategoryList name="CATG3" id={3} icon="" />
-        </div>
+          <div className="mb-4 flex items-center">
+            <CategoryList name="CATG1" id={1} icon="" />
+            <CategoryList name="CATG2" id={2} icon="" />
+            <CategoryList name="CATG3" id={3} icon="" />
+          </div>
 
-        <ActivitiesSection />
-      </main>
+          <ActivitiesSection />
+        </main>
 
-      <Navigation />
+        <Navigation />
+      </div>
     </div>
   );
 };
