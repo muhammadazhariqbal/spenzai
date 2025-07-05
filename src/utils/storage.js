@@ -1,11 +1,9 @@
-import { Expense } from '../types';
-
-const EXPENSES_KEY = 'expense-tracker-expenses';
+const EXPENSES_KEY = "expense-tracker-expenses";
 
 /**
  * Get all expenses from local storage
  */
-export const getExpenses = (): Expense[] => {
+export const getExpenses = () => {
   const storedExpenses = localStorage.getItem(EXPENSES_KEY);
   return storedExpenses ? JSON.parse(storedExpenses) : [];
 };
@@ -13,7 +11,7 @@ export const getExpenses = (): Expense[] => {
 /**
  * Add a new expense to local storage
  */
-export const addExpense = (expense: Expense): void => {
+export const addExpense = (expense) => {
   const expenses = getExpenses();
   expenses.push(expense);
   localStorage.setItem(EXPENSES_KEY, JSON.stringify(expenses));
@@ -22,7 +20,7 @@ export const addExpense = (expense: Expense): void => {
 /**
  * Update an existing expense in local storage
  */
-export const updateExpense = (updatedExpense: Expense): void => {
+export const updateExpense = (updatedExpense) => {
   const expenses = getExpenses();
   const index = expenses.findIndex((exp) => exp.id === updatedExpense.id);
   if (index !== -1) {
@@ -34,7 +32,7 @@ export const updateExpense = (updatedExpense: Expense): void => {
 /**
  * Delete an expense from local storage
  */
-export const deleteExpense = (id: string): void => {
+export const deleteExpense = (id) => {
   const expenses = getExpenses();
   const updatedExpenses = expenses.filter((exp) => exp.id !== id);
   localStorage.setItem(EXPENSES_KEY, JSON.stringify(updatedExpenses));
@@ -43,7 +41,7 @@ export const deleteExpense = (id: string): void => {
 /**
  * Get total expenses amount
  */
-export const getTotalExpenses = (): number => {
+export const getTotalExpenses = () => {
   const expenses = getExpenses();
   return expenses.reduce((total, expense) => total + expense.amount, 0);
 };
@@ -51,34 +49,36 @@ export const getTotalExpenses = (): number => {
 /**
  * Get expenses grouped by category
  */
-export const getExpensesByCategory = (): Record<string, number> => {
+export const getExpensesByCategory = () => {
   const expenses = getExpenses();
   return expenses.reduce((acc, expense) => {
     const { category, amount } = expense;
     acc[category] = (acc[category] || 0) + amount;
     return acc;
-  }, {} as Record<string, number>);
+  }, {});
 };
 
 /**
  * Get expenses for the current month
  */
-export const getCurrentMonthExpenses = (): Expense[] => {
+export const getCurrentMonthExpenses = () => {
   const expenses = getExpenses();
   const now = new Date();
   const currentMonth = now.getMonth();
   const currentYear = now.getFullYear();
-  
+
   return expenses.filter((expense) => {
     const expenseDate = new Date(expense.date);
-    return expenseDate.getMonth() === currentMonth && 
-           expenseDate.getFullYear() === currentYear;
+    return (
+      expenseDate.getMonth() === currentMonth &&
+      expenseDate.getFullYear() === currentYear
+    );
   });
 };
 
 /**
  * Generate a unique ID for a new expense
  */
-export const generateId = (): string => {
+export const generateId = () => {
   return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
 };
