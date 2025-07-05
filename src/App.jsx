@@ -8,34 +8,39 @@ import CameraScreen from "./screens/CameraScreen";
 import AddExpenseScreen from "./screens/AddExpenseScreen";
 import ProfileScreen from "./screens/Profile";
 import AuthScreen from "./screens/Auth";
+import InstallPrompt from "./components/InstallPrompt";
 
 function App() {
   const [isUser, setIsUser] = useState(true); // You can update this from AuthScreen when login/register succeeds
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<SplashScreen />} />
-        <Route path="/home" element={<HomeScreen />} />
-        <Route path="/history" element={<HistoryScreen />} />
-        <Route path="/camera" element={<CameraScreen />} />
-        <Route path="/add" element={<AddExpenseScreen />} />
+    <>
+      <InstallPrompt />
 
-        {/* Auth-required route */}
-        <Route
-          path="/profile"
-          element={
-            isUser ? <ProfileScreen /> : <Navigate to="/authUser" replace />
-          }
-        />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<SplashScreen />} />
+          <Route path="/home" element={<HomeScreen />} />
+          <Route path="/history" element={<HistoryScreen />} />
+          <Route path="/camera" element={<CameraScreen />} />
+          <Route path="/add" element={<AddExpenseScreen />} />
 
-        {/* Auth Screen */}
-        <Route path="/authUser" element={<AuthScreen />} />
+          {/* Auth-required route */}
+          <Route
+            path="/profile"
+            element={
+              isUser ? <ProfileScreen /> : <Navigate to="/authUser" replace />
+            }
+          />
 
-        {/* Catch-all */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </BrowserRouter>
+          {/* Auth Screen */}
+          <Route path="/authUser" element={<AuthScreen />} />
+
+          {/* Catch-all */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
