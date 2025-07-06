@@ -20,6 +20,11 @@
 }
 
 body {
+}
+html,
+body {
+  overscroll-behavior: none;
+  touch-action: manipulation;
   font-family: "ClashGrotesk", sans-serif;
   @apply bg-slate-50 text-slate-800;
   background-color: white;

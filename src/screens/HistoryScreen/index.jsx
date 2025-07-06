@@ -12,9 +12,10 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+import SpentCard from "../../components/SpentCard.jsx";
 const spentHistoryData = [
   {
-    icon: <ShoppingBag size={20} className="text-slate-700" />,
+    icon: "Utensils",
     title: "Shoe Bag",
     date: "June 28, 2020",
     amount: "-$526",
@@ -22,7 +23,7 @@ const spentHistoryData = [
     textColor: "text-green-600",
   },
   {
-    icon: <CreditCard size={20} className="text-slate-700" />,
+    icon: "Utensils",
     title: "Purchase",
     date: "June 8, 2022",
     amount: "-$256",
@@ -30,7 +31,7 @@ const spentHistoryData = [
     textColor: "text-purple-600",
   },
   {
-    icon: <CreditCard size={20} className="text-slate-700" />,
+    icon: "Utensils",
     title: "Purchase",
     date: "June 8, 2022",
     amount: "-$256",
@@ -164,21 +165,7 @@ const HistoryScreen = () => {
             </div>
             <div className="flex gap-3 overflow-x-auto pb-2">
               {spentHistoryData.map((item, idx) => (
-                <div
-                  key={idx}
-                  className={`min-w-[130px] rounded-xl p-3 shadow ${item.color} flex flex-col`}
-                >
-                  <div className="mb-2">{item.icon}</div>
-                  <div className="font-medium text-slate-800 text-sm">
-                    {item.title}
-                  </div>
-                  <div className="text-[10px] text-slate-500 mb-1">
-                    {item.date}
-                  </div>
-                  <div className={`text-base font-bold ${item.textColor}`}>
-                    {item.amount}
-                  </div>
-                </div>
+                <SpentCard item={item} />
               ))}
             </div>
           </div>

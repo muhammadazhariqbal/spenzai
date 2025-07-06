@@ -8,7 +8,7 @@ const SplashScreen = () => {
   return (
     <>
       <div className="flex min-h-screen flex-col items-center justify-center bg-[#FFFFFF] from-primary to-secondary p-4 text-white">
-        <div className="splash-animation flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
           <img
             src={topUpper}
             height="120px"

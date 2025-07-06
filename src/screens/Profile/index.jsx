@@ -47,7 +47,7 @@ const ProfileScreen = () => {
         </div>
 
         {/* Name + Edit */}
-        <div className="flex items-center mb-1 gap-2">
+        <div className="flex items-center mb-1 gap-2 flex-col justify-center">
           {editingName ? (
             <>
               <input

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HomeHeader from "../../components/HomeHeader";
 import ExpenseSummary from "../../components/ExpenseSummary";
@@ -9,9 +9,7 @@ import { getExpenses } from "../../utils/storage";
 import { CATEGORIES } from "../../utils/categories";
 
 const HomeScreen = () => {
-  const navigate = useNavigate();
-  const expenses = useMemo(() => getExpenses().slice(0, 5), []);
-
+  const [selectedCategory, setSelectedCategory] = useState("");
   return (
     <div className="flex flex-col items-center bg-white min-h-screen">
       <div className="w-full max-w-md bg-white flex flex-col min-h-screen relative">
@@ -28,6 +26,8 @@ const HomeScreen = () => {
                 id={cat.id}
                 name={cat.name}
                 icon={cat.icon}
+                selected={selectedCategory === cat.id}
+                onSelect={setSelectedCategory}
                 bgColor="bg-[#F4F4F4]"
               />
             ))}

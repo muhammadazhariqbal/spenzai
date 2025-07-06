@@ -14,7 +14,9 @@ const AddExpenseScreen = () => {
   const [showCalendar, setShowCalendar] = useState(false);
 
   const handlePress = (value) => {
-    if (value === "delete") {
+    if (value === "back") {
+      navigate("/home");
+    } else if (value === "delete") {
       setAmount((prev) => (prev.length > 1 ? prev.slice(0, -1) : "0"));
     } else if (value === "calendar") {
       setShowCalendar(true);
@@ -52,7 +54,7 @@ Date: ${format(date, "yyyy-MM-dd")}`);
     "7",
     "8",
     "9",
-    "$",
+    "back",
     "0",
     ".",
     "",
@@ -68,42 +70,42 @@ Date: ${format(date, "yyyy-MM-dd")}`);
         <h1 className="text-lg font-semibold mx-auto">Add Expense</h1>
       </div>
 
-      {/* Scrollable Content Step-by-Step */}
-      <div className="flex-1 overflow-y-auto px-4 py-6">
-        {step === 1 && (
-          <div className="text-center">
-            <p className="text-gray-500 text-sm">Enter amount</p>
-            <h2 className="text-4xl font-bold mt-2">
-              <span className="text-gray-400 text-2xl">$</span>
-              {amount}
-            </h2>
-          </div>
-        )}
+      <div className="flex-1 overflow-y-auto ">
+        <div className="min-h-full flex flex-col items-center justify-center px-4 py-6">
+          {step === 1 && (
+            <div className="text-center  p-4 rounded w-full">
+              <p className="text-gray-500 text-sm">Enter amount</p>
+              <h2 className="text-4xl font-bold mt-2">
+                <span className="text-gray-400 text-2xl">{`$ ${amount}`}</span>
+              </h2>
+            </div>
+          )}
 
-        {step === 2 && (
-          <div>
-            <p className="text-gray-500 text-sm text-center mb-2">
-              Choose category
-            </p>
-            <CategoryScroller
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-            />
-          </div>
-        )}
+          {step === 2 && (
+            <div className="w-full">
+              <p className="text-gray-500 text-sm text-center mb-2">
+                Choose category
+              </p>
+              <CategoryScroller
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+              />
+            </div>
+          )}
 
-        {step === 3 && (
-          <div className="text-center">
-            <p className="text-gray-500 text-sm">Add optional note</p>
-            <input
-              type="text"
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
-              placeholder="e.g. Dinner with friends"
-              className="w-full mt-3 px-4 py-2 rounded-lg border border-gray-200 text-sm text-center"
-            />
-          </div>
-        )}
+          {step === 3 && (
+            <div className="text-center w-full">
+              <p className="text-gray-500 text-sm">Add optional note</p>
+              <input
+                type="text"
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                placeholder="e.g. Dinner with friends"
+                className="w-full mt-3 px-4 py-2 rounded-lg border border-gray-200 text-[16px] text-center"
+              />
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Keypad - Fixed */}
@@ -120,7 +122,7 @@ Date: ${format(date, "yyyy-MM-dd")}`);
                     ? "bg-cyan-200"
                     : key === "delete"
                     ? "bg-green-200"
-                    : key === "$"
+                    : key === "back"
                     ? "bg-yellow-200"
                     : "bg-gray-100"
                 }`}
@@ -129,6 +131,8 @@ Date: ${format(date, "yyyy-MM-dd")}`);
                   <Delete className="w-6 h-6" />
                 ) : key === "calendar" ? (
                   <Calendar className="w-6 h-6" />
+                ) : key === "back" ? (
+                  <ChevronLeft className="w-6 h-6" />
                 ) : (
                   key
                 )}
