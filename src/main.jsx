@@ -3,27 +3,35 @@ import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 
-// Register service worker for PWA only if not running in StackBlitz
-if (
-  "serviceWorker" in navigator &&
-  !window.navigator.userAgent.includes("StackBlitz")
-) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/sw.js").catch((error) => {
-      console.error("Service worker registration failed:", error);
-    });
-  });
-}
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("/sw.js")
-      .then((reg) => console.log("Service worker registered", reg))
-      .catch((err) =>
-        console.error("Service worker registration failed:", err)
-      );
+      .register("/service-worker.js")
+      .then((registration) => {
+        console.log("✅ Service Worker registered");
+
+        // Listen for updates
+        registration.onupdatefound = () => {
+          const newWorker = registration.installing;
+          newWorker.onstatechange = () => {
+            if (
+              newWorker.state === "installed" &&
+              navigator.serviceWorker.controller
+            ) {
+              // New update is ready
+              console.log("🚀 New update available");
+              // Optional: Notify user and reload
+              if (confirm("New version available. Reload now?")) {
+                window.location.reload();
+              }
+            }
+          };
+        };
+      })
+      .catch((err) => console.error("SW registration failed:", err));
   });
 }
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <App />
