@@ -12,7 +12,7 @@ export default function HomeHeader({ name }) {
           className="w-10 h-10 rounded-full object-cover"
         />
         <div>
-          <p className="text-sm text-gray-600">Hello GGGG</p>
+          <p className="text-sm text-gray-600">Hello, </p>
           <p className="text-lg font-semibold text-black">Welcome back</p>
         </div>
       </div>
