@@ -10,20 +10,17 @@ if ("serviceWorker" in navigator) {
       .then((registration) => {
         console.log("✅ Service Worker registered");
 
-        // Listen for updates
         registration.onupdatefound = () => {
           const newWorker = registration.installing;
           newWorker.onstatechange = () => {
             if (
               newWorker.state === "installed" &&
-              navigator.serviceWorker.controller
+              navigator.serviceWorker.controller &&
+              !sessionStorage.getItem("reloaded")
             ) {
-              // New update is ready
               console.log("🚀 New update available");
-              // Optional: Notify user and reload
-              if (confirm("New version available. Reload now?")) {
-                window.location.reload();
-              }
+              sessionStorage.setItem("reloaded", "true");
+              window.location.reload(); // Auto-reload only once
             }
           };
         };
