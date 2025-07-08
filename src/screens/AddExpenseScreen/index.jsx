@@ -14,31 +14,48 @@ const AddExpenseScreen = () => {
   const [showCalendar, setShowCalendar] = useState(false);
 
   const handlePress = (value) => {
-    if (value === "home") {
-      navigate("/home");
-    } else if (value === "delete") {
-      setAmount((prev) => (prev.length > 1 ? prev.slice(0, -1) : "0"));
-    } else if (value === "calendar") {
-      setShowCalendar(true);
-    } else if (value === "ok") {
-      if (step === 1 && amount !== "0") {
-        setStep(2);
-      } else if (step === 2 && selectedCategory) {
-        setStep(3);
-      } else if (step === 3) {
-        alert(`✅ Expense Added:
+    switch (value) {
+      case "home":
+        navigate("/home");
+        break;
+
+      case "delete":
+        setAmount((prev) => (prev.length > 1 ? prev.slice(0, -1) : "0"));
+        break;
+
+      case "calendar":
+        setShowCalendar(true);
+        break;
+
+      case "ok":
+        if (step === 1 && amount !== "0") {
+          setStep(2);
+        } else if (step === 2 && selectedCategory) {
+          setStep(3);
+        } else if (step === 3) {
+          alert(`✅ Expense Added:
 Amount: $${amount}
 Category: ${selectedCategory.name}
 Note: ${note}
 Date: ${format(date, "yyyy-MM-dd")}`);
-        // Reset
-        setAmount("0");
-        setSelectedCategory(null);
-        setNote("");
-        setStep(1);
-      }
-    } else {
-      setAmount((prev) => (prev === "0" ? value : prev + value));
+          // Reset
+          setAmount("0");
+          setSelectedCategory(null);
+          setNote("");
+          setStep(1);
+        }
+        break;
+
+      default:
+        setAmount((prev) => {
+          if (value === ".") {
+            if (prev.includes(".")) return prev; // Prevent multiple dots
+            return prev + ".";
+          }
+
+          return prev === "0" ? value : prev + value;
+        });
+        break;
     }
   };
 
@@ -65,7 +82,7 @@ Date: ${format(date, "yyyy-MM-dd")}`);
       {/* Header - Fixed */}
       <div className="flex items-center gap-2 p-4 border-b sticky top-0 bg-white z-10">
         <button onClick={() => navigate("/home")}>
-          <ChevronLeft className="w-6 h-6" />
+          {/* <ChevronLeft className="w-6 h-6" /> */}
         </button>
         <h1 className="text-lg font-semibold mx-auto">Add Expense</h1>
       </div>
