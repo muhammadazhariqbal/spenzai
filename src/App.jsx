@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
-import SplashScreen from "./screens/SplashScreen";
+import WelcomeScreen from "./screens/WelcomeScreen";
 import HomeScreen from "./screens/HomeScreen";
 import HistoryScreen from "./screens/HistoryScreen";
 import CameraScreen from "./screens/CameraScreen";
@@ -12,32 +11,21 @@ import InstallPrompt from "./components/InstallPrompt";
 import UnderConstruction from "./components/UnderConstruction";
 
 function App() {
-  const [isUser, setIsUser] = useState(true); // You can update this from AuthScreen when login/register succeeds
-
   return (
     <>
       <InstallPrompt />
 
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<AddExpenseScreen />} />
+          <Route path="/" element={<WelcomeScreen />} />
+
           <Route path="/home" element={<HomeScreen />} />
           <Route path="/history" element={<HistoryScreen />} />
           <Route path="/camera" element={<CameraScreen />} />
           <Route path="/add" element={<AddExpenseScreen />} />
 
           {/* Auth-required route */}
-          <Route
-            path="/profile"
-            element={
-              // isUser ? <ProfileScreen /> : <Navigate to="/authUser" replace />
-              isUser ? (
-                <UnderConstruction />
-              ) : (
-                <Navigate to="/authUser" replace />
-              )
-            }
-          />
+          <Route path="/profile" element={<UnderConstruction />} />
 
           {/* Auth Screen */}
           <Route path="/authUser" element={<AuthScreen />} />

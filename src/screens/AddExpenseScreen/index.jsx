@@ -3,6 +3,7 @@ import { Calendar, Check, ChevronLeft, Delete } from "lucide-react";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import CategoryScroller from "../../components/CategoryScroller";
+import { addExpense } from "../../utils/localStorage";
 
 const AddExpenseScreen = () => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const AddExpenseScreen = () => {
   const [date, setDate] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
 
-  const handlePress = (value) => {
+  const handlePress = async (value) => {
     switch (value) {
       case "home":
         navigate("/home");
@@ -33,6 +34,12 @@ const AddExpenseScreen = () => {
         } else if (step === 2 && selectedCategory) {
           setStep(3);
         } else if (step === 3) {
+          await addExpense({
+            amount: 200,
+            category: "Food",
+            date: "2025-07-08",
+            note: "Lunch",
+          });
           alert(`✅ Expense Added:
 Amount: $${amount}
 Category: ${selectedCategory.name}

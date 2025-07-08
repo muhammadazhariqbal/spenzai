@@ -9,6 +9,7 @@ import {
   Book,
   MoreHorizontal,
 } from "lucide-react";
+import { getUserLocal } from "./localStorage";
 export const CATEGORIES = [
   {
     id: "food",
@@ -72,11 +73,14 @@ export const getCategoryDetails = (categoryId) => {
     CATEGORIES[CATEGORIES.length - 1]
   );
 };
-
 export const formatCurrency = (amount) => {
+  // Get user from localStorage synchronously (assuming it's cached or available)
+  const user = getUserLocal();
+  const currency = user?.settings?.currency || "USD";
+
   return new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "USD",
+    currency: currency,
     minimumFractionDigits: 2,
   }).format(amount);
 };

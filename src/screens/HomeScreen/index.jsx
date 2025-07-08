@@ -5,7 +5,7 @@ import ExpenseSummary from "../../components/ExpenseSummary";
 import CategoryList from "../../components/CategoryList";
 import ActivitiesSection from "../../components/ActivitiesSection";
 import Navigation from "../../components/Navigation";
-import { getExpenses } from "../../utils/storage";
+
 import { CATEGORIES } from "../../utils/categories";
 
 const HomeScreen = () => {
@@ -15,7 +15,7 @@ const HomeScreen = () => {
       <div className="w-full max-w-md bg-white flex flex-col min-h-screen relative">
         {/* Header - Fixed */}
         <div className="sticky top-0 bg-white z-10 pt-4 px-4 pb-2">
-          <HomeHeader name="Ali" />
+          <HomeHeader />
           <ExpenseSummary />
 
           {/* Category Scroll */}

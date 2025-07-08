@@ -1,32 +1,33 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { formatCurrency } from "../utils/categories";
 import {
   getExpensesByCategory,
   getCurrentMonthExpenses,
-} from "../utils/storage";
+  getUserLocal,
+} from "../utils/localStorage.js";
 
 const ExpenseSummary = () => {
-  const monthlyExpenses = useMemo(() => getCurrentMonthExpenses(), []);
-  const categoryTotals = useMemo(() => getExpensesByCategory(), []);
+  // const monthlyExpenses = useMemo(() => getCurrentMonthExpenses(), []);
+  // const categoryTotals = useMemo(() => getExpensesByCategory(), []);
 
-  const totalMonthlyExpense = useMemo(
-    () => monthlyExpenses.reduce((sum, expense) => sum + expense.amount, 0),
-    [monthlyExpenses]
-  );
+  // const totalMonthlyExpense = useMemo(
+  //   () => monthlyExpenses.reduce((sum, expense) => sum + expense.amount, 0),
+  //   [monthlyExpenses]
+  // );
 
-  // Find top 3 categories
-  const topCategories = useMemo(() => {
-    return Object.entries(categoryTotals)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 3);
-  }, [categoryTotals]);
+  // // Find top 3 categories
+  // const topCategories = useMemo(() => {
+  //   return Object.entries(categoryTotals)
+  //     .sort((a, b) => b[1] - a[1])
+  //     .slice(0, 3);
+  // }, [categoryTotals]);
 
   return (
     <div className="bg-black rounded-lg shadow-sm p-4 mb-2">
       <h2 className="text-md font-semibold mb-3 text-white">This Month</h2>
 
-      <div className="text-3xl font-bold text-slate-800  text-white">
-        {formatCurrency(totalMonthlyExpense)}
+      <div className="text-3xl font-bold  text-white">
+        {formatCurrency(1234.56)}
       </div>
 
       {/* {topCategories.length > 0 ? (

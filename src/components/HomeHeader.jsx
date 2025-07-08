@@ -1,7 +1,7 @@
 import { Bell } from "lucide-react"; // You can use heroicons or lucide-react
 import helloImg from "../assets/helloIcon.png";
 
-export default function HomeHeader({ name }) {
+export default function HomeHeader({}) {
   return (
     <div className="flex items-center justify-between p-4 rounded-xl bg-white ">
       {/* Left: Avatar and greeting */}
