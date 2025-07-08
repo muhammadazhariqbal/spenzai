@@ -14,7 +14,7 @@ const AddExpenseScreen = () => {
   const [showCalendar, setShowCalendar] = useState(false);
 
   const handlePress = (value) => {
-    if (value === "back") {
+    if (value === "home") {
       navigate("/home");
     } else if (value === "delete") {
       setAmount((prev) => (prev.length > 1 ? prev.slice(0, -1) : "0"));
@@ -54,7 +54,7 @@ Date: ${format(date, "yyyy-MM-dd")}`);
     "7",
     "8",
     "9",
-    "back",
+    "home",
     "0",
     ".",
     "",
@@ -76,7 +76,8 @@ Date: ${format(date, "yyyy-MM-dd")}`);
             <div className="text-center  p-4 rounded w-full">
               <p className="text-gray-500 text-sm">Enter amount</p>
               <h2 className="text-4xl font-bold mt-2">
-                <span className="text-gray-400 text-2xl">{`$ ${amount}`}</span>
+                <span className="text-gray-400 text-2xl">{`$ `}</span>
+                <span className="text-gray-400 text-5xl">{`${amount}`}</span>
               </h2>
             </div>
           )}
@@ -122,7 +123,7 @@ Date: ${format(date, "yyyy-MM-dd")}`);
                     ? "bg-cyan-200"
                     : key === "delete"
                     ? "bg-green-200"
-                    : key === "back"
+                    : key === "home"
                     ? "bg-yellow-200"
                     : "bg-gray-100"
                 }`}
@@ -131,8 +132,22 @@ Date: ${format(date, "yyyy-MM-dd")}`);
                   <Delete className="w-6 h-6" />
                 ) : key === "calendar" ? (
                   <Calendar className="w-6 h-6" />
-                ) : key === "back" ? (
-                  <ChevronLeft className="w-6 h-6" />
+                ) : key === "home" ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-house-icon lucide-house"
+                  >
+                    <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+                    <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                  </svg>
                 ) : (
                   key
                 )}
