@@ -9,6 +9,7 @@ import AddExpenseScreen from "./screens/AddExpenseScreen";
 import ProfileScreen from "./screens/Profile";
 import AuthScreen from "./screens/Auth";
 import InstallPrompt from "./components/InstallPrompt";
+import UnderConstruction from "./components/UnderConstruction";
 
 function App() {
   const [isUser, setIsUser] = useState(true); // You can update this from AuthScreen when login/register succeeds
@@ -19,7 +20,7 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<SplashScreen />} />
+          <Route path="/" element={<AddExpenseScreen />} />
           <Route path="/home" element={<HomeScreen />} />
           <Route path="/history" element={<HistoryScreen />} />
           <Route path="/camera" element={<CameraScreen />} />
@@ -29,7 +30,12 @@ function App() {
           <Route
             path="/profile"
             element={
-              isUser ? <ProfileScreen /> : <Navigate to="/authUser" replace />
+              // isUser ? <ProfileScreen /> : <Navigate to="/authUser" replace />
+              isUser ? (
+                <UnderConstruction />
+              ) : (
+                <Navigate to="/authUser" replace />
+              )
             }
           />
 
@@ -37,7 +43,7 @@ function App() {
           <Route path="/authUser" element={<AuthScreen />} />
 
           {/* Catch-all */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="" replace />} />
         </Routes>
       </BrowserRouter>
     </>
