@@ -6,7 +6,7 @@ const CategoryScroller = ({ selectedCategory, setSelectedCategory }) => {
   return (
     <div className="overflow-x-auto hide-scrollbar px-1">
       <div className="flex gap-3 py-2">
-        {CATEGORIES.map((cat) => {
+        {CATEGORIES.filter((cat) => cat.id !== "all").map((cat) => {
           const LucideIcon = Icons[cat.icon] || Icons.Circle;
           const isSelected = selectedCategory?.id === cat.id;
 
