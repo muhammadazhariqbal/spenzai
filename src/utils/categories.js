@@ -8,9 +8,16 @@ import {
   Plane,
   Book,
   MoreHorizontal,
+  Rows3,
 } from "lucide-react";
 import { getUserLocal } from "./localStorage";
 export const CATEGORIES = [
+  {
+    id: "all",
+    name: "All",
+    icon: "Rows3",
+    color: "#788876",
+  },
   {
     id: "food",
     name: "Food & Drinks",
@@ -73,16 +80,21 @@ export const getCategoryDetails = (categoryId) => {
     CATEGORIES[CATEGORIES.length - 1]
   );
 };
-export const formatCurrency = (amount) => {
-  // Get user from localStorage synchronously (assuming it's cached or available)
-  const user = getUserLocal();
-  const currency = user?.settings?.currency || "USD";
+export const formatCurrency = (amount, currency) => {
+  try {
+    if (!currency) {
+      throw new Error("Invalid amount or currency");
+    }
 
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: currency,
-    minimumFractionDigits: 2,
-  }).format(amount);
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: currency,
+      minimumFractionDigits: 2,
+    }).format(amount);
+  } catch (err) {
+    console.error("formatCurrency error:", err.message);
+    return "---";
+  }
 };
 
 export const ICON_MAP = {
@@ -95,4 +107,5 @@ export const ICON_MAP = {
   Plane,
   Book,
   MoreHorizontal,
+  Rows3,
 };

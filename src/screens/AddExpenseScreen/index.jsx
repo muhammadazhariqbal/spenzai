@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import CategoryScroller from "../../components/CategoryScroller";
 import { addExpense } from "../../utils/localStorage";
 import { AppContext } from "../../utils/AppContext";
+import { formatCurrency } from "../../utils/categories";
 
 const AddExpenseScreen = () => {
   const navigate = useNavigate();
@@ -38,16 +39,13 @@ const AddExpenseScreen = () => {
           setStep(3);
         } else if (step === 3) {
           await saveExpense({
-            amount: 200,
-            category: "Food",
-            date: "2025-07-08",
-            note: "Lunch",
+            amount: parseFloat(amount),
+            category: selectedCategory.id,
+            date: format(date, "yyyy-MM-dd"),
+            note: note,
+            currency: user.settings.currency,
           });
-          alert(`✅ Expense Added:
-Amount: $${amount}
-Category: ${selectedCategory.name}
-Note: ${note}
-Date: ${format(date, "yyyy-MM-dd")}`);
+
           // Reset
           setAmount("0");
           setSelectedCategory(null);
@@ -103,8 +101,9 @@ Date: ${format(date, "yyyy-MM-dd")}`);
             <div className="text-center  p-4 rounded w-full">
               <p className="text-gray-500 text-sm">Enter amount</p>
               <h2 className="text-4xl font-bold mt-2">
-                <span className="text-gray-400 text-2xl">{`$ `}</span>
-                <span className="text-gray-400 text-5xl">{`${amount}`}</span>
+                <span className="text-gray-400 text-2xl">
+                  {formatCurrency(amount, user?.settings?.currency)}
+                </span>
               </h2>
             </div>
           )}

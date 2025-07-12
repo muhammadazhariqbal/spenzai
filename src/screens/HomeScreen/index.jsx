@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HomeHeader from "../../components/HomeHeader";
 import ExpenseSummary from "../../components/ExpenseSummary";
@@ -7,9 +7,13 @@ import ActivitiesSection from "../../components/ActivitiesSection";
 import Navigation from "../../components/Navigation";
 
 import { CATEGORIES } from "../../utils/categories";
+import { AppContext } from "../../utils/AppContext";
 
 const HomeScreen = () => {
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const { user, saveUser, expenses, saveExpense, isLoading } =
+    useContext(AppContext);
+  console.log(expenses, "expenses");
   return (
     <div className="flex flex-col items-center bg-white min-h-screen">
       <div className="w-full max-w-md bg-white flex flex-col min-h-screen relative">
@@ -36,7 +40,7 @@ const HomeScreen = () => {
 
         {/* Scrollable Activities Section */}
         <div className="flex-1 overflow-y-auto px-4 pt-2 pb-24">
-          <ActivitiesSection />
+          <ActivitiesSection selectedCategory={selectedCategory} />
         </div>
 
         {/* Fixed Navigation */}

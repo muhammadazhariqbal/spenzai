@@ -16,34 +16,14 @@ const WelcomeScreen = () => {
   const navigate = useNavigate();
   const [showAskCountryPrompt, setShowAskCountryPrompt] = useState(false);
   const [showError, setShowError] = useState(false);
-  const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    isSync: false,
-    createdAt: new Date(),
-    id: generateId(),
-    settings: {
-      language: navigator.language,
-      currency: "",
-      country: "",
-    },
-    browser: navigator.userAgent,
-    device: /Mobi|Android/i.test(navigator.userAgent) ? "Mobile" : "Desktop",
-    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-  });
+  const { saveUser, user, isLoading } = useContext(AppContext);
 
-  const { user, saveUser, expenses, saveExpense, isLoading } =
-    useContext(AppContext);
-
-  console.log(
-    { user, saveUser, expenses, saveExpense, checkLoader },
-    "context api."
-  );
   // Check for existing user on component mount
   useEffect(() => {
     const checkExistingUser = async () => {
       try {
-        if (user && user.settings?.country) {
+        console.log(user, "user on check");
+        if (!isLoading && user.settings?.country) {
           // User exists and has completed setup, redirect to /add
           navigate("/add");
         }
@@ -53,14 +33,20 @@ const WelcomeScreen = () => {
     };
 
     checkExistingUser();
-  }, [navigate]);
+  }, [navigate, user]);
 
   const handleSelect = async (country) => {
     // Prepare the updated user object once
     const updatedUser = {
-      ...user,
+      name: "",
+      email: "",
+      isSync: false,
+      createdAt: new Date(),
+      id: generateId(),
+      browser: navigator.userAgent,
+      device: /Mobi|Android/i.test(navigator.userAgent) ? "Mobile" : "Desktop",
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       settings: {
-        ...user.settings,
         currency: country.currency,
         country: country.name,
       },
@@ -79,7 +65,7 @@ const WelcomeScreen = () => {
   };
 
   // Show creative loading screen while checking user
-  if (checkLoader) {
+  if (isLoading) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-[#FFFFFF] p-4">
         <div className="flex flex-col items-center justify-center space-y-6">
