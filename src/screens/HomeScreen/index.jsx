@@ -11,9 +11,9 @@ import { AppContext } from "../../utils/AppContext";
 
 const HomeScreen = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const { user, saveUser, expenses, saveExpense, isLoading } =
-    useContext(AppContext);
-  console.log(expenses, "expenses");
+  const { expenses } = useContext(AppContext);
+  console.log("expense in home screen:", expenses);
+
   return (
     <div className="flex flex-col items-center bg-white min-h-screen">
       <div className="w-full max-w-md bg-white flex flex-col min-h-screen relative">

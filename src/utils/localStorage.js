@@ -68,7 +68,12 @@ export const updateExpense = async (updatedExpense) => {
  * Delete an expense from local storage
  */
 export const deleteExpenseLocal = async (id) => {
-  await expenses.removeItem(id);
+  try {
+    await expenses.removeItem(id);
+    console.log("Expense deleted:", id);
+  } catch (err) {
+    console.error("Error deleting expense:", err);
+  }
 };
 
 /**

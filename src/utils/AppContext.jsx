@@ -54,11 +54,11 @@ export const AppProvider = ({ children }) => {
   }, []);
 
   const saveExpense = async (expense) => {
-    await addExpense(expense);
+    const expenseDetails = await addExpense(expense);
 
     // update expenses
     setExpenses((prev) => {
-      const updatedExpenses = [...prev, expense];
+      const updatedExpenses = [...prev, expenseDetails];
 
       // recalculate total
       setTotalSpent(
@@ -70,7 +70,7 @@ export const AppProvider = ({ children }) => {
   };
 
   const deleteExpense = async (itemId, expensesData) => {
-    await deleteExpenseLocal(itemId); // or call a reset method in your context
+    await deleteExpenseLocal(itemId);
     await getAllExpenses();
   };
 

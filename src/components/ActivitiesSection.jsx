@@ -5,6 +5,7 @@ import { AppContext } from "../utils/AppContext";
 import { capitalizeFirst, isDateMatchFilter } from "../utils/helpers";
 import HoldableItem from "./HoldableItem";
 import { ConfirmDeleteModal } from "./ConfirmDeleteModal.jsx";
+import { deleteExpenseLocal } from "../utils/localStorage.js";
 
 const ActivitiesSection = ({ selectedCategory }) => {
   const [selected, setSelected] = useState("today");
@@ -19,16 +20,14 @@ const ActivitiesSection = ({ selectedCategory }) => {
     setOpen(false);
   };
   const handleDelete = async () => {
-    console.log(itemToDelete.id), "id";
-    await deleteExpense(itemToDelete.id);
-    setItemToDelete(null);
+    console.log(itemToDelete, "itemToDelete.id");
+    deleteExpense(itemToDelete);
     setShowConfirm(false);
   };
 
   useEffect(() => {
     setActivities(expenses);
-    console.log(expenses, "expensescdelde");
-  }, [showConfirm, itemToDelete]);
+  }, [expenses]);
 
   return (
     <div className="w-full max-w-md mx-auto px-4 py-4">
@@ -77,8 +76,10 @@ const ActivitiesSection = ({ selectedCategory }) => {
           .filter((expense) => isDateMatchFilter(expense.date, selected))
           .map((activity) => (
             <HoldableItem
+              key={activity.id}
               onHold={() => {
-                setItemToDelete(activity);
+                console.log(activity.id, "activity.id");
+                setItemToDelete(activity.id);
                 setShowConfirm(true);
               }}
             >
