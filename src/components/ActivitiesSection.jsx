@@ -6,6 +6,7 @@ import { capitalizeFirst, isDateMatchFilter } from "../utils/helpers";
 import HoldableItem from "./HoldableItem";
 import { ConfirmDeleteModal } from "./ConfirmDeleteModal.jsx";
 import { deleteExpenseLocal } from "../utils/localStorage.js";
+import { formatCurrency } from "../utils/categories.js";
 
 const ActivitiesSection = ({ selectedCategory }) => {
   const [selected, setSelected] = useState("today");
@@ -101,7 +102,7 @@ const ActivitiesSection = ({ selectedCategory }) => {
                   </div>
                 </div>
                 <p className="text-sm font-semibold text-black">
-                  - {activity.currency} {activity.amount}
+                  - {formatCurrency(activity.amount, activity.currency)}
                 </p>
               </div>
             </HoldableItem>

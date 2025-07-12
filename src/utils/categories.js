@@ -80,20 +80,28 @@ export const getCategoryDetails = (categoryId) => {
     CATEGORIES[CATEGORIES.length - 1]
   );
 };
-export const formatCurrency = (amount, currency) => {
+export const formatCurrency = (amount, currency, maxDigits = 9) => {
   try {
     if (!currency) {
       throw new Error("Invalid amount or currency");
     }
 
+    const [integerPart] = Math.abs(amount).toString().split(".");
+    if (integerPart.length > maxDigits) {
+      // Custom fallback for large amounts
+      if (amount >= 1_000_000_000) return `>1B ${currency}`;
+      if (amount >= 1_000_000) return `>1M ${currency}`;
+      return `>${maxDigits}d ${currency}`;
+    }
+
     return new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: currency,
+      currency,
       minimumFractionDigits: 2,
     }).format(amount);
   } catch (err) {
     console.error("formatCurrency error:", err.message);
-    return "---";
+    return `Invalid ${currency}`;
   }
 };
 
