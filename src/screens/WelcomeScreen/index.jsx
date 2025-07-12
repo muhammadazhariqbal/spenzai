@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import headerimg from "../../assets/main-logo.png";
 import topUpper from "../../assets/splash-top.png";
 import { useNavigate } from "react-router-dom";
@@ -10,14 +10,13 @@ import {
 import { Settings } from "lucide-react";
 import CountrySelectModal from "../../components/CountrySelectModal.jsx";
 import { Alert } from "../../components/Alert.jsx";
+import { AppContext } from "../../utils/AppContext.jsx";
 
 const WelcomeScreen = () => {
   const navigate = useNavigate();
   const [showAskCountryPrompt, setShowAskCountryPrompt] = useState(false);
   const [showError, setShowError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isCheckingUser, setIsCheckingUser] = useState(true);
-  const [user, setUser] = useState({
+  const [userData, setUserData] = useState({
     name: "",
     email: "",
     isSync: false,
@@ -33,24 +32,23 @@ const WelcomeScreen = () => {
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   });
 
+  const { user, saveUser, expenses, saveExpense, isLoading } =
+    useContext(AppContext);
+
+  console.log(
+    { user, saveUser, expenses, saveExpense, checkLoader },
+    "context api."
+  );
   // Check for existing user on component mount
   useEffect(() => {
     const checkExistingUser = async () => {
       try {
-        setIsCheckingUser(true);
-
-        const existingUser = await getUserLocal();
-
-        if (existingUser && existingUser.settings?.country) {
+        if (user && user.settings?.country) {
           // User exists and has completed setup, redirect to /add
           navigate("/add");
-        } else {
-          // No user found or incomplete setup, stay on welcome screen
-          setIsCheckingUser(false);
         }
       } catch (error) {
         console.error("Error checking existing user:", error);
-        setIsCheckingUser(false);
       }
     };
 
@@ -58,8 +56,6 @@ const WelcomeScreen = () => {
   }, [navigate]);
 
   const handleSelect = async (country) => {
-    setIsLoading(true);
-
     // Prepare the updated user object once
     const updatedUser = {
       ...user,
@@ -71,28 +67,19 @@ const WelcomeScreen = () => {
     };
 
     try {
-      // Log it for debugging
-      console.log("🧠 Complete user object:", updatedUser);
-
-      // Save locally (might throw)
-      await initUserLocal(updatedUser);
-
-      // Navigate to /add after successful setup
+      await saveUser(updatedUser);
       navigate("/add");
     } catch (error) {
-      // Log the full error
       console.error("handleSelect → initUserLocal failed:", error);
 
-      // Show a user-friendly message (swap in your toast/alert)
       alert("Something went wrong saving your profile. Please try again.");
     } finally {
       // Always turn off loading
-      setIsLoading(false);
     }
   };
 
   // Show creative loading screen while checking user
-  if (isCheckingUser) {
+  if (checkLoader) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-[#FFFFFF] p-4">
         <div className="flex flex-col items-center justify-center space-y-6">
