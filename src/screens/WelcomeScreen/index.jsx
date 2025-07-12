@@ -26,6 +26,8 @@ const WelcomeScreen = () => {
         if (!isLoading && user.settings?.country) {
           // User exists and has completed setup, redirect to /add
           navigate("/add");
+        } else {
+          navigate("/");
         }
       } catch (error) {
         console.error("Error checking existing user:", error);

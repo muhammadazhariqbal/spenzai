@@ -16,22 +16,20 @@ export const AppProvider = ({ children }) => {
   const [expenses, setExpenses] = useState([]);
   const [totalSpent, setTotalSpent] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const checkExistingUser = async () => {
+    try {
+      setIsLoading(true);
 
+      const existingUser = await getUserLocal();
+      setUser(existingUser);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.error("Error checking existing user:", error);
+    }
+  };
   // for user
   useEffect(() => {
-    const checkExistingUser = async () => {
-      try {
-        setIsLoading(true);
-
-        const existingUser = await getUserLocal();
-        setUser(existingUser);
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-        console.error("Error checking existing user:", error);
-      }
-    };
-
     checkExistingUser();
   }, []);
   const getAllExpenses = async () => {
@@ -92,6 +90,7 @@ export const AppProvider = ({ children }) => {
         totalSpent,
         deleteExpense,
         getAllExpenses,
+        checkExistingUser,
       }}
     >
       {children}
