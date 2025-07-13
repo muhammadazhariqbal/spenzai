@@ -140,3 +140,16 @@ export const resetAllData = async () => {
   await expenses.clear();
   await user.clear();
 };
+
+export const resetUserQuoteType = async () => {
+  try {
+    const userData = await user.getItem("user-profile");
+    if (!userData) return;
+
+    const { quoteType, ...rest } = userData;
+    await user.setItem("user-profile", rest);
+    return rest;
+  } catch (err) {
+    console.error("Error resetting quote type:", err);
+  }
+};

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navigation from "./Navigation";
-import { resetAllData } from "../utils/localStorage";
+import { resetAllData, resetUserQuoteType } from "../utils/localStorage";
 import { AppContext } from "../utils/AppContext";
 
 const UnderConstruction = () => {
@@ -9,6 +9,7 @@ const UnderConstruction = () => {
   const [showResetModal, setShowResetModal] = useState(false);
   const navigate = useNavigate();
   const { checkExistingUser, getAllExpenses } = useContext(AppContext);
+  const [resetAlert, setResetAlert] = useState(false);
 
   const handleReset = async () => {
     await resetAllData();
@@ -18,9 +19,23 @@ const UnderConstruction = () => {
 
     navigate("/");
   };
+  const handleResetQuoteType = async () => {
+    await resetUserQuoteType();
+    checkExistingUser();
+
+    setResetAlert(true);
+
+    // Hide alert after 2.5 seconds
+    setTimeout(() => setResetAlert(false), 2500);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white text-black px-6 text-center relative">
+      {resetAlert && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-green-100 text-green-700 text-sm px-4 py-2 rounded">
+          🎉 Preference reset successfully.
+        </div>
+      )}
       <div className="space-y-6">
         <div className="flex flex-col gap-4 mt-6">
           <button
@@ -56,6 +71,12 @@ const UnderConstruction = () => {
           </div>
         </div>
       )}
+      <button
+        onClick={handleResetQuoteType}
+        className="text-sm text-red-500 underline mt-3"
+      >
+        Reset Quote Preference
+      </button>
 
       {/* Reset Confirmation Modal */}
       {showResetModal && (

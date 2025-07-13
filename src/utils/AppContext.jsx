@@ -57,7 +57,9 @@ export const AppProvider = ({ children }) => {
         const user = await getUserLocal();
         console.log(user, "user get user local");
         if (user?.quoteType) {
-          setQuoteType(user.quoteType); // e.g., "all", "islamic", "general", "none"
+          setQuoteType(user.quoteType);
+        } else {
+          setQuoteType(false);
         }
       } catch (err) {
         console.error("Error fetching quote type from user profile:", err);
@@ -65,7 +67,7 @@ export const AppProvider = ({ children }) => {
     };
 
     fetchQuoteType();
-  }, [quoteType]);
+  }, [quoteType, user]);
 
   const handleQuoteType = async (value) => {
     console.log(value, "value contexx");
