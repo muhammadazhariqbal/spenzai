@@ -47,7 +47,7 @@ const AddExpenseScreen = () => {
             note: note,
             currency: user.settings.currency,
           });
-
+          navigator.vibrate(100);
           // Reset
           setAmount("0");
           setSelectedCategory(null);
