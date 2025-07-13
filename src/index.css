@@ -19,8 +19,7 @@ html,
 body {
   overscroll-behavior: none;
   touch-action: manipulation;
-  font-family: "ClashGrotesk", "ClashGrotesk-Regular", "ClashGrotesk-Variable",
-    sans-serif;
+  font-family: "ClashGrotesk", "ClashGrotesk-Regular", sans-serif;
   @apply bg-slate-50 text-slate-800;
   background-color: white;
 }

@@ -140,9 +140,9 @@ const WelcomeScreen = () => {
             style={{ position: "absolute", top: 0, right: 0 }}
           />
           <img src={headerimg} height="250" width="250px" className="mt-5" />
-          <h1 className="mb-2 text-4xl font-bold text-left mt-10 text-black">
+          <h3 className="mb-2 text-4xl text-left mt-10 text-black">
             Easy ways to manage your expenses
-          </h1>
+          </h3>
           <button
             className="w-[98%] mt-6 flex items-center justify-center space-x-2 bg-black text-white px-8 py-4 rounded-full transition-all duration-300"
             onClick={() => {
@@ -156,7 +156,7 @@ const WelcomeScreen = () => {
                 <span className="text-lg font-semibold">Setting up...</span>
               </>
             ) : (
-              <span className="text-lg font-semibold">Get Started</span>
+              <span className="text-lg ">Get Started</span>
             )}
           </button>
         </div>
