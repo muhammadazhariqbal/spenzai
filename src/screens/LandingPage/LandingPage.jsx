@@ -224,6 +224,7 @@ const LandingPage = () => {
         <h2 className="text-2xl font-semibold mb-2">Start Today</h2>
         <p className="text-sm text-gray-600 mb-4">Free. Simple. Effective.</p>
         <button
+          data-umami-event="Start Tracking Now Click"
           onClick={() => navigate("/")}
           className="bg-black text-white px-6 py-2 rounded-full font-semibold hover:scale-105 transition"
         >

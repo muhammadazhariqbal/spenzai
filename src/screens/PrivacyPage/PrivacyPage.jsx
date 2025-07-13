@@ -61,7 +61,11 @@ const PrivacyPolicy = () => {
       <h2 className="text-lg font-semibold mt-6 mb-2">Questions?</h2>
       <p>
         Email me at{" "}
-        <a href="mailto:azhar@spenzai.com" className="text-blue-600 underline">
+        <a
+          href="mailto:azhar@spenzai.com"
+          data-umami-event="Support Email Click"
+          className="text-blue-600 underline"
+        >
           azhar@spenzai.com
         </a>
       </p>
