@@ -1,11 +1,4 @@
-@font-face {
-  font-family: "ClashGrotesk";
-  src: url("/fonts/ClashGrotesk-Medium.otf") format("opentype");
-
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
+@import "/fonts/WEB/css/clash-grotesk.css";
 
 @tailwind base;
 @tailwind components;
@@ -26,7 +19,8 @@ html,
 body {
   overscroll-behavior: none;
   touch-action: manipulation;
-  font-family: "ClashGrotesk", sans-serif;
+  font-family: "ClashGrotesk", "ClashGrotesk-Regular", "ClashGrotesk-Variable",
+    sans-serif;
   @apply bg-slate-50 text-slate-800;
   background-color: white;
 }
