@@ -8,6 +8,7 @@ import {
   getUserLocal,
   initUserLocal,
 } from "./localStorage";
+import { isDateMatchFilter } from "./helpers";
 
 export const AppContext = createContext();
 
@@ -16,6 +17,11 @@ export const AppProvider = ({ children }) => {
   const [expenses, setExpenses] = useState([]);
   const [totalSpent, setTotalSpent] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [duration, setDuration] = useState("today");
+  const [totalToday, setTotalToday] = useState("00");
+  const [totalWeek, setTotalWeek] = useState("00");
+  const [totalMonth, setTotalMonth] = useState("00");
+
   const checkExistingUser = async () => {
     try {
       setIsLoading(true);
@@ -28,6 +34,35 @@ export const AppProvider = ({ children }) => {
       console.error("Error checking existing user:", error);
     }
   };
+
+  useEffect(() => {
+    handleCalculateTotal();
+  }, [duration, totalSpent]);
+  const handleDurationContext = (value) => {
+    setDuration(value);
+  };
+
+  const handleCalculateTotal = async () => {
+    const allExpenses = await getExpenses();
+
+    const totalToday = allExpenses
+      .filter((item) => isDateMatchFilter(item.date, "today"))
+      .reduce((sum, item) => sum + Number(item.amount), 0);
+
+    const totalWeek = allExpenses
+      .filter((item) => isDateMatchFilter(item.date, "week"))
+      .reduce((sum, item) => sum + Number(item.amount), 0);
+
+    const totalMonth = allExpenses
+      .filter((item) => isDateMatchFilter(item.date, "month"))
+      .reduce((sum, item) => sum + Number(item.amount), 0);
+
+    // Set these values to state if needed
+    setTotalToday(totalToday);
+    setTotalWeek(totalWeek);
+    setTotalMonth(totalMonth);
+  };
+
   // for user
   useEffect(() => {
     checkExistingUser();
@@ -38,6 +73,7 @@ export const AppProvider = ({ children }) => {
 
       const allExpenses = await getExpenses();
       setTotalSpent(await getTotalExpenses(allExpenses));
+      await handleCalculateTotal();
       setExpenses(allExpenses);
       setIsLoading(false);
     } catch (error) {
@@ -91,6 +127,11 @@ export const AppProvider = ({ children }) => {
         deleteExpense,
         getAllExpenses,
         checkExistingUser,
+        handleDurationContext,
+        duration,
+        totalMonth,
+        totalWeek,
+        totalToday,
       }}
     >
       {children}

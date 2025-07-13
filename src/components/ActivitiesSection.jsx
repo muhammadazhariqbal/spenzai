@@ -9,14 +9,17 @@ import { deleteExpenseLocal } from "../utils/localStorage.js";
 import { formatCurrency } from "../utils/categories.js";
 
 const ActivitiesSection = ({ selectedCategory }) => {
-  const [selected, setSelected] = useState("today");
+  const { expenses, deleteExpense, handleDurationContext, duration } =
+    useContext(AppContext);
+  const [selected, setSelected] = useState(duration);
   const [open, setOpen] = useState(false);
-  const { expenses, deleteExpense } = useContext(AppContext);
+
   const [activities, setActivities] = useState([]);
   const [showConfirm, setShowConfirm] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
 
   const handleSelect = (option) => {
+    handleDurationContext(option);
     setSelected(option);
     setOpen(false);
   };

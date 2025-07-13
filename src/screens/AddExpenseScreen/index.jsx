@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Calendar, Check, ChevronLeft, Delete } from "lucide-react";
-import { format } from "date-fns";
+import { format, startOfMonth, endOfMonth } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import CategoryScroller from "../../components/CategoryScroller";
 import { addExpense } from "../../utils/localStorage";
@@ -17,7 +17,9 @@ const AddExpenseScreen = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [date, setDate] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
-
+  const today = new Date();
+  const minDate = format(startOfMonth(today), "yyyy-MM-dd");
+  const maxDate = format(endOfMonth(today), "yyyy-MM-dd");
   const handlePress = async (value) => {
     switch (value) {
       case "home":
@@ -200,6 +202,8 @@ const AddExpenseScreen = () => {
               type="date"
               className="w-full border px-4 py-2 rounded text-sm"
               value={format(date, "yyyy-MM-dd")}
+              min={minDate}
+              max={maxDate}
               onChange={(e) => setDate(new Date(e.target.value))}
             />
             <div className="mt-4 flex justify-center">

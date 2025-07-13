@@ -1,22 +1,58 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { formatCurrency } from "../utils/categories";
 import { AppContext } from "../utils/AppContext";
+import { capitalizeFirst } from "../utils/helpers";
 
 const ExpenseSummary = () => {
-  const { user, saveUser, expenses, saveExpense, isLoading, totalSpent } =
-    useContext(AppContext);
+  const {
+    user,
+    saveUser,
+    expenses,
+    saveExpense,
+    isLoading,
+    totalSpent,
+    duration,
+    totalMonth,
+    totalWeek,
+    totalToday,
+  } = useContext(AppContext);
   const [summary, setSummary] = useState({ totalSpent, currency: "" });
-
+  console.log(totalMonth, totalWeek, totalToday, duration);
   useEffect(() => {
-    setSummary({ totalSpent, currency: user?.settings?.currency });
-  }, [expenses, user, isLoading, totalSpent]);
+    console.log(duration, "duration on con");
+    setSummary({
+      totalSpent:
+        duration === "today"
+          ? totalToday
+          : duration === "month"
+          ? totalMonth
+          : duration === "week"
+          ? totalWeek
+          : totalSpent,
+      currency: user?.settings?.currency,
+    });
+  }, [
+    expenses,
+    user,
+    isLoading,
+    totalSpent,
+    duration,
+    totalMonth,
+    totalToday,
+    totalWeek,
+  ]);
 
+  console.log("duration ", duration);
   return (
     <div className="bg-black rounded-lg shadow-sm p-4 mb-2">
-      <h2 className="text-md font-semibold mb-3 text-white">This Month</h2>
+      <h2 className="text-md font-semibold mb-3 text-white">
+        {duration !== "today"
+          ? `This ${capitalizeFirst(duration)}`
+          : capitalizeFirst(duration)}
+      </h2>
 
       <div className="text-3xl font-bold  text-white">
-        {formatCurrency(totalSpent, user?.settings?.currency || "USD")}
+        {formatCurrency(summary.totalSpent, user?.settings?.currency || "USD")}
       </div>
 
       {/* {topCategories.length > 0 ? (
