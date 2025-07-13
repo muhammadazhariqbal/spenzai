@@ -3,18 +3,12 @@ import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { AppProvider } from "./utils/AppContext.jsx";
+import { registerSW } from "virtual:pwa-register";
 
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("/service-worker.js")
-      .then((registration) => {
-        console.log("✅ Service Worker registered");
-      })
-      .catch((err) => console.error("SW registration failed:", err));
-  });
-}
-
+const updateSW = registerSW({
+  onNeedRefresh() {},
+  onOfflineReady() {},
+});
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AppProvider>
