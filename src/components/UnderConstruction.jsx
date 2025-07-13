@@ -7,6 +7,7 @@ import { AppContext } from "../utils/AppContext";
 const UnderConstruction = () => {
   const [showBackupModal, setShowBackupModal] = useState(false);
   const [showResetModal, setShowResetModal] = useState(false);
+  const [showLanguageModal, setShowLanguageModal] = useState(false);
   const [resetAlert, setResetAlert] = useState(false);
   const navigate = useNavigate();
   const { checkExistingUser, getAllExpenses } = useContext(AppContext);
@@ -27,7 +28,7 @@ const UnderConstruction = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white text-black px-6 text-center relative">
+    <div className="flex flex-col items-center min-h-screen bg-white text-black px-6 text-center relative overflow-y-auto py-10">
       {/* Success Alert */}
       {resetAlert && (
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-green-100 text-green-700 text-sm px-4 py-2 rounded shadow">
@@ -35,7 +36,7 @@ const UnderConstruction = () => {
         </div>
       )}
 
-      <div className="w-full max-w-sm space-y-6 mt-10">
+      <div className="w-full max-w-sm space-y-6">
         {/* Page Title */}
         <h1 className="text-2xl font-semibold text-slate-900">
           🚧 Profile Under Construction
@@ -65,12 +66,18 @@ const UnderConstruction = () => {
           >
             Reset All Data
           </button>
+          <button
+            onClick={() => setShowBackupModal(true)}
+            className="text-sm text-slate-900 underline"
+          >
+            🌍 Change Language
+          </button>
         </div>
 
         {/* Reset Quote Button */}
         <button
           onClick={handleResetQuoteType}
-          className="text-sm text-red-500 underline mt-2"
+          className="text-sm text-red-500 underline"
         >
           Reset Quote Preference
         </button>
@@ -88,6 +95,26 @@ const UnderConstruction = () => {
             </p>
             <button
               onClick={() => setShowBackupModal(false)}
+              className="bg-black text-white px-4 py-2 rounded-full text-sm"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Language Modal */}
+      {showLanguageModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-6 max-w-sm w-full text-center shadow-lg">
+            <h3 className="text-lg font-semibold mb-3 text-slate-900">
+              🌍 Coming Soon
+            </h3>
+            <p className="text-gray-600 mb-4">
+              Language selection feature is under development.
+            </p>
+            <button
+              onClick={() => setShowLanguageModal(false)}
               className="bg-black text-white px-4 py-2 rounded-full text-sm"
             >
               Close
@@ -126,7 +153,9 @@ const UnderConstruction = () => {
       )}
 
       {/* Bottom Navigation */}
-      <Navigation />
+      <div className="mt-10">
+        <Navigation />
+      </div>
     </div>
   );
 };
