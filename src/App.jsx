@@ -9,6 +9,7 @@ import ProfileScreen from "./screens/Profile";
 import AuthScreen from "./screens/Auth";
 import InstallPrompt from "./components/InstallPrompt";
 import UnderConstruction from "./components/UnderConstruction";
+import LandingPage from "./screens/LandingPage/LandingPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<WelcomeScreen />} />
 
           <Route path="/home" element={<HomeScreen />} />
+          <Route path="/about" element={<LandingPage />} />
           <Route path="/history" element={<HistoryScreen />} />
           <Route path="/camera" element={<CameraScreen />} />
           <Route path="/add" element={<AddExpenseScreen />} />
