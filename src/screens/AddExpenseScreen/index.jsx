@@ -6,7 +6,7 @@ import CategoryScroller from "../../components/CategoryScroller";
 import { addExpense } from "../../utils/localStorage";
 import { AppContext } from "../../utils/AppContext";
 import { formatCurrency } from "../../utils/categories";
-
+import { Checkmark } from "react-checkmark";
 const AddExpenseScreen = () => {
   const navigate = useNavigate();
   const { user, saveUser, expenses, saveExpense, isLoading } =
@@ -15,6 +15,7 @@ const AddExpenseScreen = () => {
   const [amount, setAmount] = useState("0");
   const [note, setNote] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [checkShow, setCheckShow] = useState(false);
   const [date, setDate] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
   const today = new Date();
@@ -47,12 +48,17 @@ const AddExpenseScreen = () => {
             note: note,
             currency: user.settings.currency,
           });
+          setCheckShow(true);
           navigator.vibrate(100);
           // Reset
           setAmount("0");
           setSelectedCategory(null);
           setNote("");
           setStep(1);
+
+          setTimeout(() => {
+            setCheckShow(false);
+          }, 2000);
         }
         break;
 
@@ -99,7 +105,7 @@ const AddExpenseScreen = () => {
 
       <div className="flex-1 overflow-y-auto ">
         <div className="min-h-full flex flex-col items-center justify-center px-4 py-6">
-          {step === 1 && (
+          {step === 1 && !checkShow && (
             <div className="text-center  p-4 rounded w-full">
               <p className="text-gray-500 text-sm">Enter amount</p>
               <h2 className="text-4xl font-bold mt-2">
@@ -109,7 +115,11 @@ const AddExpenseScreen = () => {
               </h2>
             </div>
           )}
-
+          {checkShow && (
+            <div className="absolute inset-0 z-50 pt-28 flex items-start justify-center">
+              <Checkmark />
+            </div>
+          )}
           {step === 2 && (
             <div className="w-full">
               <p className="text-gray-500 text-sm text-center mb-2">
