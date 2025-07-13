@@ -49,7 +49,7 @@ const AddExpenseScreen = () => {
             currency: user.settings.currency,
           });
           setCheckShow(true);
-          navigator.vibrate(100);
+
           // Reset
           setAmount("0");
           setSelectedCategory(null);
@@ -58,7 +58,7 @@ const AddExpenseScreen = () => {
 
           setTimeout(() => {
             setCheckShow(false);
-          }, 2000);
+          }, 1500);
         }
         break;
 
