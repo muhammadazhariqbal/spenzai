@@ -11,9 +11,9 @@ import { formatCurrency } from "../utils/categories.js";
 const ActivitiesSection = ({ selectedCategory }) => {
   const { expenses, deleteExpense, handleDurationContext, duration } =
     useContext(AppContext);
+
   const [selected, setSelected] = useState(duration);
   const [open, setOpen] = useState(false);
-
   const [activities, setActivities] = useState([]);
   const [showConfirm, setShowConfirm] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
@@ -23,8 +23,8 @@ const ActivitiesSection = ({ selectedCategory }) => {
     setSelected(option);
     setOpen(false);
   };
+
   const handleDelete = async () => {
-    console.log(itemToDelete, "itemToDelete.id");
     deleteExpense(itemToDelete);
     setShowConfirm(false);
   };
@@ -33,6 +33,14 @@ const ActivitiesSection = ({ selectedCategory }) => {
     setActivities(expenses);
   }, [expenses]);
 
+  const filteredByTime = activities.filter((expense) =>
+    isDateMatchFilter(expense.date, selected)
+  );
+
+  const filteredByCategory = filteredByTime.filter((expense) =>
+    selectedCategory === "all" ? true : expense.category === selectedCategory
+  );
+
   return (
     <div className="w-full max-w-md mx-auto px-4 py-4">
       <ConfirmDeleteModal
@@ -40,6 +48,7 @@ const ActivitiesSection = ({ selectedCategory }) => {
         onClose={() => setShowConfirm(false)}
         onConfirm={handleDelete}
       />
+
       {/* Header with Dropdown */}
       <div className="relative flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-black">Activities</h2>
@@ -71,45 +80,43 @@ const ActivitiesSection = ({ selectedCategory }) => {
 
       {/* Activities List */}
       <div className="space-y-3">
-        {activities
-          .filter((expense) =>
-            selectedCategory === "all"
-              ? true
-              : expense.category === selectedCategory
-          )
-          .filter((expense) => isDateMatchFilter(expense.date, selected))
-          .map((activity) => (
-            <HoldableItem
-              key={activity.id}
-              onHold={() => {
-                console.log(activity.id, "activity.id");
-                setItemToDelete(activity.id);
-                setShowConfirm(true);
-              }}
-            >
-              <div
-                key={activity.id}
-                className="flex items-center justify-between bg-gray-50 p-3 rounded-lg shadow-sm"
-              >
-                <div className="flex items-center space-x-3">
-                  <img
-                    src={sideIcon}
-                    alt={activity.title}
-                    className="w-8 h-8 rounded-md object-contain"
-                  />
-                  <div>
-                    <p className="text-sm font-semibold text-black">
-                      {capitalizeFirst(activity.note)}
-                    </p>
-                    <p className="text-xs text-gray-500">{activity.category}</p>
-                  </div>
+        {filteredByCategory.map((activity) => (
+          <HoldableItem
+            key={activity.id}
+            onHold={() => {
+              setItemToDelete(activity.id);
+              setShowConfirm(true);
+            }}
+          >
+            <div className="flex items-center justify-between bg-gray-50 p-3 rounded-lg shadow-sm">
+              <div className="flex items-center space-x-3">
+                <img
+                  src={sideIcon}
+                  alt={activity.title}
+                  className="w-8 h-8 rounded-md object-contain"
+                />
+                <div>
+                  <p className="text-sm font-semibold text-black">
+                    {capitalizeFirst(activity.note)}
+                  </p>
+                  <p className="text-xs text-gray-500">{activity.category}</p>
                 </div>
-                <p className="text-sm font-semibold text-black">
-                  - {formatCurrency(activity.amount, activity.currency)}
-                </p>
               </div>
-            </HoldableItem>
-          ))}
+              <p className="text-sm font-semibold text-black">
+                - {formatCurrency(activity.amount, activity.currency)}
+              </p>
+            </div>
+          </HoldableItem>
+        ))}
+
+        {/* No Data Handling */}
+        {filteredByCategory.length === 0 && (
+          <div className="text-center text-sm text-gray-500 mt-10">
+            {filteredByTime.length === 0
+              ? "🕊️ Nothing here yet... either you're super rich or forgot to track again 😅"
+              : "🧐 No expenses in this category for this duration."}
+          </div>
+        )}
       </div>
     </div>
   );
