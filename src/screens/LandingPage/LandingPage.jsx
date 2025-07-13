@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const sections = [
   {
@@ -65,7 +66,7 @@ const sections = [
       },
       {
         text: "I was using notes app before. This is so much better and it's free!",
-        name: "Fatima",
+        name: "Ayesha",
       },
       {
         text: "Love the Islamic finance quotes. Reminds me to spend mindfully.",
@@ -88,9 +89,9 @@ const sections = [
     id: "coming",
     title: "Coming Soon",
     list: [
-      "🌍 Multi-Language Support - English, Arabic, Urdu, and more",
-      "📧 Monthly Email Reports - Get a detailed spending summary delivered to your inbox",
-      "💾 Smart Data Backup - Backup and restore your data easily",
+      "Multi-Language Support - English, Arabic, Urdu, and more",
+      "Monthly Email Reports - Get a detailed spending summary delivered to your inbox",
+      "Data Backup - Backup and restore your data easily",
     ],
   },
 ];
@@ -99,8 +100,8 @@ const Footer = () => (
   <footer className="mt-12 text-center text-xs text-gray-400">
     <div>Spenzai - Made with ❤️ for mindful financial management</div>
     <div className="space-x-4 mt-2">
-      <a href="#">Privacy</a>
-      <a href="#">Support</a>
+      <a href="/privacy">Privacy</a>
+
       <a href="https://github.com/muhammadazhariqbal">GitHub</a>
     </div>
     <div className="mt-4 text-gray-500 text-sm">
@@ -131,6 +132,7 @@ const Footer = () => (
 );
 
 const LandingPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="text-black bg-white font-sans px-6 py-8 max-w-3xl mx-auto">
       {/* Hero */}
@@ -138,14 +140,14 @@ const LandingPage = () => {
         <h1 className="text-3xl font-bold mb-4">{sections[0].title}</h1>
         <p className="text-gray-600 mb-6">{sections[0].description}</p>
         <div className="flex gap-3 justify-center">
-          {sections[0].buttons.map((btn) => (
+          {/* {sections[0].buttons.map((btn) => (
             <button
               key={btn}
               className="bg-black text-white px-4 py-2 rounded-full text-sm hover:scale-105 transition"
             >
               {btn}
             </button>
-          ))}
+          ))} */}
         </div>
       </section>
 
@@ -221,13 +223,16 @@ const LandingPage = () => {
       <section className="text-center my-12">
         <h2 className="text-2xl font-semibold mb-2">Start Today</h2>
         <p className="text-sm text-gray-600 mb-4">Free. Simple. Effective.</p>
-        <button className="bg-black text-white px-6 py-2 rounded-full font-semibold hover:scale-105 transition">
+        <button
+          onClick={() => navigate("/")}
+          className="bg-black text-white px-6 py-2 rounded-full font-semibold hover:scale-105 transition"
+        >
           Start Tracking Now
         </button>
-        <p className="text-xs text-gray-500 mt-2">
+        {/* <p className="text-xs text-gray-500 mt-2">
           Join thousands who've ditched their notes app for better expense
           tracking
-        </p>
+        </p> */}
         <p className="text-xs text-gray-400 mt-1">
           More features coming soon! 🌟
         </p>

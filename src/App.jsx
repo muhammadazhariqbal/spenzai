@@ -10,6 +10,7 @@ import AuthScreen from "./screens/Auth";
 import InstallPrompt from "./components/InstallPrompt";
 import UnderConstruction from "./components/UnderConstruction";
 import LandingPage from "./screens/LandingPage/LandingPage";
+import PrivacyPolicy from "./screens/PrivacyPage/PrivacyPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/history" element={<HistoryScreen />} />
           <Route path="/camera" element={<CameraScreen />} />
           <Route path="/add" element={<AddExpenseScreen />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
 
           {/* Auth-required route */}
           <Route path="/profile" element={<UnderConstruction />} />
