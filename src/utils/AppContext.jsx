@@ -7,8 +7,10 @@ import {
   getTotalExpenses,
   getUserLocal,
   initUserLocal,
+  updateUserQuoteType,
 } from "./localStorage";
 import { isDateMatchFilter } from "./helpers";
+import localforage from "localforage";
 
 export const AppContext = createContext();
 
@@ -21,6 +23,20 @@ export const AppProvider = ({ children }) => {
   const [totalToday, setTotalToday] = useState("00");
   const [totalWeek, setTotalWeek] = useState("00");
   const [totalMonth, setTotalMonth] = useState("00");
+  const [quoteType, setQuoteType] = useState(false);
+
+  const [totalsByCategory, setTotalsByCategory] = useState({});
+  const [totalsByType, setTotalsByType] = useState({
+    needs: 0,
+    wants: 0,
+    save: 0,
+  });
+  const [percentByType, setPercentByType] = useState({
+    needs: "0.0",
+    wants: "0.0",
+    save: "0.0",
+  });
+  const [grandTotal, setGrandTotal] = useState(0);
 
   const checkExistingUser = async () => {
     try {
@@ -36,12 +52,82 @@ export const AppProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    const fetchQuoteType = async () => {
+      try {
+        const user = await getUserLocal();
+        console.log(user, "user get user local");
+        if (user?.quoteType) {
+          setQuoteType(user.quoteType); // e.g., "all", "islamic", "general", "none"
+        }
+      } catch (err) {
+        console.error("Error fetching quote type from user profile:", err);
+      }
+    };
+
+    fetchQuoteType();
+  }, [quoteType]);
+
+  const handleQuoteType = async (value) => {
+    console.log(value, "value contexx");
+
+    try {
+      await updateUserQuoteType(value);
+      setQuoteType(value);
+      console.log(value, "success contexx");
+    } catch (error) {
+      console.error("Failed to save quote type in user profile:", error);
+    }
+  };
+
+  useEffect(() => {
     handleCalculateTotal();
   }, [duration, totalSpent]);
   const handleDurationContext = (value) => {
     setDuration(value);
   };
+  const calculateSpentByCategory = (expenses) => {
+    const categoryMap = {
+      food: "needs",
+      transportation: "needs",
+      utilities: "needs",
+      health: "needs",
+      education: "needs",
+      entertainment: "wants",
+      shopping: "wants",
+      travel: "wants",
+      other: "wants",
+      emergency: "save",
+      investment: "save",
+      goal: "save",
+      retirement: "save",
+      donation: "save",
+    };
 
+    const totalsByCategory = {};
+    const totalsByType = { needs: 0, wants: 0, save: 0 };
+    let grandTotal = 0;
+
+    expenses.forEach((item) => {
+      const category = item.category;
+      const amount = Number(item.amount || 0);
+      const type = categoryMap[category] || "wants";
+
+      totalsByCategory[category] = (totalsByCategory[category] || 0) + amount;
+      totalsByType[type] += amount;
+      grandTotal += amount;
+    });
+
+    const percentByType = {
+      needs: ((totalsByType.needs / grandTotal) * 100 || 0).toFixed(1),
+      wants: ((totalsByType.wants / grandTotal) * 100 || 0).toFixed(1),
+      save: ((totalsByType.save / grandTotal) * 100 || 0).toFixed(1),
+    };
+
+    setTotalsByCategory(totalsByCategory);
+    setTotalsByType(totalsByType);
+    setPercentByType(percentByType);
+    setGrandTotal(grandTotal);
+  };
   const handleCalculateTotal = async () => {
     const allExpenses = await getExpenses();
 
@@ -61,6 +147,7 @@ export const AppProvider = ({ children }) => {
     setTotalToday(totalToday);
     setTotalWeek(totalWeek);
     setTotalMonth(totalMonth);
+    calculateSpentByCategory(allExpenses);
   };
 
   // for user
@@ -74,6 +161,7 @@ export const AppProvider = ({ children }) => {
       const allExpenses = await getExpenses();
       setTotalSpent(await getTotalExpenses(allExpenses));
       await handleCalculateTotal();
+      calculateSpentByCategory(allExpenses);
       setExpenses(allExpenses);
       setIsLoading(false);
     } catch (error) {
@@ -132,6 +220,13 @@ export const AppProvider = ({ children }) => {
         totalMonth,
         totalWeek,
         totalToday,
+        calculateSpentByCategory,
+        totalsByCategory,
+        totalsByType,
+        percentByType,
+        grandTotal,
+        handleQuoteType,
+        quoteType,
       }}
     >
       {children}

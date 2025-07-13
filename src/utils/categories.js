@@ -9,6 +9,11 @@ import {
   Book,
   MoreHorizontal,
   Rows3,
+  ShieldCheck,
+  TrendingUp,
+  Target,
+  Briefcase,
+  HandHeart,
 } from "lucide-react";
 import { getUserLocal } from "./localStorage";
 export const CATEGORIES = [
@@ -72,6 +77,36 @@ export const CATEGORIES = [
     icon: "MoreHorizontal",
     color: "#5E6472",
   },
+  {
+    id: "emergency",
+    name: "Emergency Fund",
+    icon: "ShieldCheck",
+    color: "#3F88C5",
+  },
+  {
+    id: "investment",
+    name: "Investment",
+    icon: "TrendingUp",
+    color: "#06D6A0",
+  },
+  {
+    id: "goal",
+    name: "Goal",
+    icon: "Target",
+    color: "#FFD166",
+  },
+  {
+    id: "retirement",
+    name: "Retirement",
+    icon: "Briefcase",
+    color: "#8D99AE",
+  },
+  {
+    id: "donation",
+    name: "Charity",
+    icon: "HandHeart",
+    color: "#EF476F",
+  },
 ];
 
 export const getCategoryDetails = (categoryId) => {
@@ -116,4 +151,9 @@ export const ICON_MAP = {
   Book,
   MoreHorizontal,
   Rows3,
+  ShieldCheck,
+  TrendingUp,
+  Target,
+  Briefcase,
+  HandHeart,
 };

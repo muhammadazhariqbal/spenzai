@@ -15,6 +15,7 @@ const UnderConstruction = () => {
     setShowResetModal(false);
     checkExistingUser();
     getAllExpenses();
+
     navigate("/");
   };
 

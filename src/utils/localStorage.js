@@ -36,6 +36,24 @@ export const getExpenses = async () => {
   });
   return all;
 };
+export const updateUserQuoteType = async (quoteType) => {
+  try {
+    const existingUser = await user.getItem("user-profile");
+
+    if (!existingUser) throw new Error("No user found in local storage");
+
+    const updatedUser = {
+      ...existingUser,
+      quoteType, // add or update quoteType field
+    };
+
+    await user.setItem("user-profile", updatedUser);
+    return updatedUser;
+  } catch (err) {
+    console.error("Error updating quote type in user:", err);
+    return null;
+  }
+};
 
 export const getUser = async () => {
   const id = user.id || generateId();
