@@ -42,10 +42,9 @@ Spenzai is a sophisticated Progressive Web App (PWA) designed for personal expen
 - **15 expense categories** organized by type (Needs/Wants/Savings)
 - **Real-time analytics** and spending insights
 - **Date-based filtering** (Today/Week/Month)
-- **Receipt scanning** capability (placeholder)
 - **Hold-to-delete** expense management
 
-### Smart Analytics
+### Analytics
 
 - **Spending breakdown** by category and type
 - **Progress bars** for Needs vs Wants vs Savings
