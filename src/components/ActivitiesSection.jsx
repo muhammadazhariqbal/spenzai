@@ -113,7 +113,7 @@ const ActivitiesSection = ({ selectedCategory }) => {
         {filteredByCategory.length === 0 && (
           <div className="text-center text-sm text-gray-500 mt-10">
             {filteredByTime.length === 0
-              ? "🕊️ Nothing here yet... either you're super rich or forgot to track again 😅"
+              ? "🕊️ Nothing here yet..."
               : "🧐 No expenses in this category for this duration."}
           </div>
         )}
