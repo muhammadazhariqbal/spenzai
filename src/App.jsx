@@ -15,8 +15,6 @@ import PrivacyPolicy from "./screens/PrivacyPage/PrivacyPage";
 function App() {
   return (
     <>
-      <InstallPrompt />
-
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<WelcomeScreen />} />

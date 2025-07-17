@@ -16,6 +16,7 @@ const WelcomeScreen = () => {
   const navigate = useNavigate();
   const [showAskCountryPrompt, setShowAskCountryPrompt] = useState(false);
   const [showError, setShowError] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const { saveUser, user, isLoading } = useContext(AppContext);
 
   // Check for existing user on component mount
@@ -58,7 +59,6 @@ const WelcomeScreen = () => {
       navigate("/add");
     } catch (error) {
       console.error("handleSelect → initUserLocal failed:", error);
-
       alert("Something went wrong saving your profile. Please try again.");
     } finally {
       // Always turn off loading
@@ -130,6 +130,65 @@ const WelcomeScreen = () => {
         onSelect={handleSelect}
         onClose={() => setShowAskCountryPrompt(false)}
       />
+      {/* Onboarding Modal */}
+      {showOnboarding && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+          <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full text-black relative">
+            <h2 className="text-2xl font-bold mb-4 text-center">
+              Install Spenzai on your device
+            </h2>
+            <div className="mb-4">
+              <p className="font-semibold mb-2">For Android (Chrome):</p>
+              <ol className="list-decimal list-inside space-y-1">
+                <li>
+                  Tap the <b>three dots</b> menu in the top-right corner.
+                </li>
+                <li>
+                  Select <b>"Add to Home screen"</b>.
+                </li>
+                <li>Follow the prompts to install the app.</li>
+              </ol>
+            </div>
+            <div className="mb-4">
+              <p className="font-semibold mb-2">For iOS (Safari):</p>
+              <ol className="list-decimal list-inside space-y-1">
+                <li>
+                  Tap the <b>Share</b> button{" "}
+                  <span role="img" aria-label="Share">
+                    &#x1f5d2;
+                  </span>{" "}
+                  at the bottom of the screen.
+                </li>
+                <li>
+                  Scroll down and select <b>"Add to Home Screen"</b>.
+                </li>
+                <li>
+                  Tap <b>Add</b> in the top-right corner.
+                </li>
+              </ol>
+            </div>
+            <button
+              className="mt-6 w-full bg-black text-white py-2 px-4 rounded-full hover:bg-gray-800 transition"
+              onClick={() => {
+                setShowOnboarding(false);
+                setShowAskCountryPrompt(true);
+              }}
+            >
+              Continue
+            </button>
+            <button
+              className="absolute top-2 right-2 text-gray-400 hover:text-black text-xl"
+              onClick={() => {
+                setShowOnboarding(false);
+                setShowAskCountryPrompt(true);
+              }}
+              aria-label="Close"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+      )}
       <div className="flex min-h-screen flex-col items-center justify-center bg-[#FFFFFF] from-primary to-secondary p-4 text-white">
         <div className="flex flex-col items-center justify-center">
           <img
@@ -145,7 +204,7 @@ const WelcomeScreen = () => {
           <button
             className="w-[98%] mt-6 flex items-center justify-center space-x-2 bg-black text-white px-8 py-4 rounded-full transition-all duration-300"
             onClick={() => {
-              setShowAskCountryPrompt(true);
+              setShowOnboarding(true);
             }}
             disabled={isLoading}
           >
