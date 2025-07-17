@@ -38,7 +38,7 @@ const UnderConstruction = () => {
 
       <div className="w-full max-w-sm space-y-6">
         {/* Page Title */}
-        <h1 className="text-2xl font-semibold text-slate-900">
+        <h1 className="text-2xl  text-slate-900">
           🚧 Profile Under Construction
         </h1>
         <p className="text-sm text-slate-500">
@@ -58,13 +58,13 @@ const UnderConstruction = () => {
           <button
             data-umami-event="Backup Data Click"
             onClick={() => setShowBackupModal(true)}
-            className="bg-slate-900 text-white px-6 py-3 rounded-full text-md font-semibold hover:scale-105 transition"
+            className="bg-slate-900 text-white px-6 py-3 rounded-full text-md  hover:scale-105 transition"
           >
             Backup Data
           </button>
           <button
             onClick={() => setShowResetModal(true)}
-            className="bg-red-600 text-white px-6 py-3 rounded-full text-md font-semibold hover:scale-105 transition"
+            className="bg-red-600 text-white px-6 py-3 rounded-full text-md  hover:scale-105 transition"
           >
             Reset All Data
           </button>

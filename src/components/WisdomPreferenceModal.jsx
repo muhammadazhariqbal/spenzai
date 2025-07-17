@@ -4,9 +4,7 @@ const WisdomPreferenceModal = ({ onSelect }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center">
       <div className="bg-white p-6 rounded-xl w-[90%] max-w-sm shadow-xl text-center">
-        <h2 className="text-lg font-semibold mb-2">
-          💬 Show Financial Wisdom?
-        </h2>
+        <h2 className="text-lg  mb-2">💬 Show Financial Wisdom?</h2>
         <p className="text-sm text-slate-600 mb-4">
           Would you like to see daily quotes related to ethical money, saving,
           and mindful spending?

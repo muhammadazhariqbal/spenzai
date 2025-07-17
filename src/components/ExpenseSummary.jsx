@@ -45,13 +45,13 @@ const ExpenseSummary = () => {
   console.log("duration ", duration);
   return (
     <div className="bg-black rounded-lg shadow-sm p-4 mb-2">
-      <h2 className="text-md font-semibold mb-3 text-white">
+      <h2 className="text-md  mb-3 text-white">
         {duration !== "today"
           ? `This ${capitalizeFirst(duration)}`
           : capitalizeFirst(duration)}
       </h2>
 
-      <div className="text-3xl font-bold  text-white">
+      <div className="text-3xl font-semibold  text-white">
         {formatCurrency(summary.totalSpent, user?.settings?.currency || "USD")}
       </div>
 

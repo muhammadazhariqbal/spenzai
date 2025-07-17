@@ -100,7 +100,7 @@ const AddExpenseScreen = () => {
         <button onClick={() => navigate("/home")}>
           {/* <ChevronLeft className="w-6 h-6" /> */}
         </button>
-        <h1 className="text-lg font-semibold mx-auto">Add Expense</h1>
+        <h1 className="text-lg  mx-auto">Add Expense</h1>
       </div>
 
       <div className="flex-1 overflow-y-auto ">
@@ -108,7 +108,7 @@ const AddExpenseScreen = () => {
           {step === 1 && !checkShow && (
             <div className="text-center  p-4 rounded w-full">
               <p className="text-gray-500 text-sm">Enter amount</p>
-              <h2 className="text-4xl font-bold mt-2">
+              <h2 className="text-4xl  mt-2">
                 <span className="text-gray-400 text-2xl">
                   {formatCurrency(amount, user?.settings?.currency)}
                 </span>

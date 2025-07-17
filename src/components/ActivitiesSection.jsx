@@ -51,7 +51,7 @@ const ActivitiesSection = ({ selectedCategory }) => {
 
       {/* Header with Dropdown */}
       <div className="relative flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold text-black">Activities</h2>
+        <h2 className="text-lg  text-black">Activities</h2>
 
         <div className="relative">
           <button
@@ -96,13 +96,13 @@ const ActivitiesSection = ({ selectedCategory }) => {
                   className="w-8 h-8 rounded-md object-contain"
                 />
                 <div>
-                  <p className="text-sm font-semibold text-black">
+                  <p className="text-sm  text-black">
                     {capitalizeFirst(activity.note)}
                   </p>
                   <p className="text-xs text-gray-500">{activity.category}</p>
                 </div>
               </div>
-              <p className="text-sm font-semibold text-black">
+              <p className="text-sm  text-black">
                 - {formatCurrency(activity.amount, activity.currency)}
               </p>
             </div>

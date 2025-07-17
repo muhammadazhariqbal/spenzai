@@ -211,7 +211,7 @@ const HistoryScreen = () => {
 
           {/* Spent History Cards */}
           <div className="mb-4">
-            <div className="text-lg font-semibold text-slate-900 mb-3">
+            <div className="text-lg text-slate-900 mb-3">
               Total Spent by Category 💸
             </div>
             <div className="flex gap-3 overflow-x-auto pb-2">
@@ -227,7 +227,7 @@ const HistoryScreen = () => {
           </div>
           <div className="mb-6">
             {/* Title */}
-            <h3 className="text-lg font-semibold text-slate-900 mb-3">
+            <h3 className="text-lg  text-slate-900 mb-3">
               📊 Where Your Money Went
             </h3>
 

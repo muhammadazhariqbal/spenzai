@@ -13,7 +13,7 @@ export default function HomeHeader({}) {
         />
         <div>
           <p className="text-sm text-gray-600">Hello, </p>
-          <p className="text-lg font-semibold text-black">Welcome back</p>
+          <p className="text-lg text-black">Welcome back</p>
         </div>
       </div>
 

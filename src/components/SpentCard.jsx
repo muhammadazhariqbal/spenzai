@@ -17,7 +17,7 @@ const SpentCard = ({ item }) => {
 
       <div className="text-sm font-medium text-slate-700">{item.title}</div>
 
-      <div className="text-base font-bold text-slate-900">{item.amount}</div>
+      <div className="text-base  text-slate-900">{item.amount}</div>
     </div>
   );
 };
