@@ -202,6 +202,12 @@ const HistoryScreen = () => {
             <div className="text-lg text-slate-900 mb-3">
               Total Spent by Category 💸
             </div>
+            {spentHistoryData.length === 0 && (
+              <div className="text-slate-500 italic mb-2">
+                Wow, look at you! Not a single penny spent. Are you a monk or
+                just really good at hiding your expenses?
+              </div>
+            )}
             <div className="flex gap-3 overflow-x-auto pb-2">
               {/* Spent History Cards */}
               <div className="mb-6">

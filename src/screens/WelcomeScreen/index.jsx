@@ -198,6 +198,9 @@ const WelcomeScreen = () => {
             style={{ position: "absolute", top: 0, right: 0 }}
           />
           <img src={headerimg} height="250" width="250px" className="mt-5" />
+          <div className="text-gray-400 text-sm mt-2">
+            v{typeof __APP_VERSION__ !== "undefined" ? __APP_VERSION__ : "dev"}
+          </div>
           <h1 className="mb-2 text-4xl text-left mt-10 text-black">
             Easy ways to manage your expenses
           </h1>

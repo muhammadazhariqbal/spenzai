@@ -71,12 +71,7 @@ export const CATEGORIES = [
     icon: "Book",
     color: "#D291BC",
   },
-  {
-    id: "other",
-    name: "Other",
-    icon: "MoreHorizontal",
-    color: "#5E6472",
-  },
+
   {
     id: "emergency",
     name: "Emergency Fund",
@@ -106,6 +101,12 @@ export const CATEGORIES = [
     name: "Charity",
     icon: "HandHeart",
     color: "#EF476F",
+  },
+  {
+    id: "other",
+    name: "Other",
+    icon: "MoreHorizontal",
+    color: "#5E6472",
   },
 ];
 
