@@ -140,31 +140,17 @@ const WelcomeScreen = () => {
             <div className="mb-4">
               <p className=" mb-2">For Android (Chrome):</p>
               <ol className="list-decimal list-inside space-y-1">
-                <li>
-                  Tap the <b>three dots</b> menu in the top-right corner.
-                </li>
-                <li>
-                  Select <b>"Add to Home screen"</b>.
-                </li>
+                <li>Tap the three dots menu in the top-right corner.</li>
+                <li>Select "Add to Home screen".</li>
                 <li>Follow the prompts to install the app.</li>
               </ol>
             </div>
             <div className="mb-4">
               <p className=" mb-2">For iOS (Safari):</p>
               <ol className="list-decimal list-inside space-y-1">
-                <li>
-                  Tap the <b>Share</b> button{" "}
-                  <span role="img" aria-label="Share">
-                    &#x1f5d2;
-                  </span>{" "}
-                  at the bottom of the screen.
-                </li>
-                <li>
-                  Scroll down and select <b>"Add to Home Screen"</b>.
-                </li>
-                <li>
-                  Tap <b>Add</b> in the top-right corner.
-                </li>
+                <li>Tap the share button at the bottom of the screen.</li>
+                <li>Scroll down and select "Add to Home Screen".</li>
+                <li>Tap Add in the top-right corner.</li>
               </ol>
             </div>
             <button
