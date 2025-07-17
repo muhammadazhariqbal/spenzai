@@ -1,47 +1,51 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+
+const isIos = () =>
+  /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
+
+const isInStandaloneMode = () =>
+  window.matchMedia("(display-mode: standalone)").matches ||
+  window.navigator.standalone === true;
 
 const InstallPrompt = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
-  const [showPrompt, setShowPrompt] = useState(false);
+  const [showAndroidPrompt, setShowAndroidPrompt] = useState(false);
+  const [showIosPrompt, setShowIosPrompt] = useState(false);
 
   useEffect(() => {
-    const handler = (e) => {
-      console.log("📦 beforeinstallprompt event fired");
-      e.preventDefault();
-      setDeferredPrompt(e);
-      setShowPrompt(true);
-    };
-
-    window.addEventListener("beforeinstallprompt", handler);
-    return () => window.removeEventListener("beforeinstallprompt", handler);
+    if (isIos()) {
+      if (!isInStandaloneMode()) {
+        setShowIosPrompt(true);
+      }
+    } else {
+      const handler = (e) => {
+        e.preventDefault();
+        setDeferredPrompt(e);
+        setShowAndroidPrompt(true);
+      };
+      window.addEventListener("beforeinstallprompt", handler);
+      return () => window.removeEventListener("beforeinstallprompt", handler);
+    }
   }, []);
 
   const handleInstall = async () => {
     if (deferredPrompt) {
       deferredPrompt.prompt();
       const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === "accepted") {
-        console.log("User accepted install");
-      } else {
-        console.log("User dismissed install");
-      }
-      setShowPrompt(false);
+      setShowAndroidPrompt(false);
       setDeferredPrompt(null);
     }
   };
 
-  if (!showPrompt) return null;
+  if (!showAndroidPrompt && !showIosPrompt) return null;
 
   return (
-    <div className="fixed bottom-4 left-0 right-0 flex justify-center z-50">
-      <div className="bg-black text-white px-5 py-3 rounded-xl shadow-lg flex items-center gap-4">
-        <div className="text-sm">Install Spenzai for quick access?</div>
-        <button
-          onClick={handleInstall}
-          className="bg-white text-black text-sm font-semibold px-3 py-1 rounded"
-        >
-          Install
-        </button>
+    <div className="fixed bottom-4 left-0 right-0 flex justify-center z-50 px-4">
+      <div className="bg-black text-white px-5 py-3 rounded-xl shadow-lg flex items-center gap-4 max-w-md w-full">
+        <div className="text-sm">
+          Install Spenzai: Tap <span className=" ">Share</span> →{" "}
+          <span className=" ">Add to Home Screen</span>
+        </div>
       </div>
     </div>
   );

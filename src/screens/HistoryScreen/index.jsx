@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import Header from "../../components/Header";
 import Navigation from "../../components/Navigation";
 import { ChevronDown, ShoppingBag, CreditCard } from "lucide-react";
@@ -12,9 +12,14 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+import SpentCard from "../../components/SpentCard.jsx";
+import { AppContext } from "../../utils/AppContext.jsx";
+import { CATEGORIES } from "../../utils/categories.js";
+import QuoteBox from "../../components/QuoteBox.jsx";
+import WisdomPreferenceModal from "../../components/WisdomPreferenceModal.jsx";
 const spentHistoryData = [
   {
-    icon: <ShoppingBag size={20} className="text-slate-700" />,
+    icon: "Utensils",
     title: "Shoe Bag",
     date: "June 28, 2020",
     amount: "-$526",
@@ -22,7 +27,7 @@ const spentHistoryData = [
     textColor: "text-green-600",
   },
   {
-    icon: <CreditCard size={20} className="text-slate-700" />,
+    icon: "Utensils",
     title: "Purchase",
     date: "June 8, 2022",
     amount: "-$256",
@@ -30,7 +35,7 @@ const spentHistoryData = [
     textColor: "text-purple-600",
   },
   {
-    icon: <CreditCard size={20} className="text-slate-700" />,
+    icon: "Utensils",
     title: "Purchase",
     date: "June 8, 2022",
     amount: "-$256",
@@ -58,6 +63,26 @@ const filterOptions = [
 
 const HistoryScreen = () => {
   const [selectedFilter, setSelectedFilter] = useState(filterOptions[0]);
+  const {
+    totalsByCategory,
+    totalsByType,
+    percentByType,
+    grandTotal,
+    user,
+    handleQuoteType,
+    quoteType,
+  } = useContext(AppContext);
+  const [showWisdom, setShowWisdom] = useState(quoteType !== "none"); // show or hide box
+  const [wisdomType, setWisdomType] = useState(quoteType || "all"); // default
+  const [showModal, setShowModal] = useState(!quoteType); // show at first load
+  const handleWisdomChoice = async (type) => {
+    await handleQuoteType(type);
+
+    setWisdomType(type);
+    setShowModal(false);
+    setShowWisdom(type !== "none");
+  };
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -77,6 +102,21 @@ const HistoryScreen = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+  const spentHistoryData = CATEGORIES.filter((cat) => cat.id !== "all")
+    .map((cat) => {
+      return {
+        icon: cat.icon,
+        title: cat.name,
+        color: cat.color,
+        value: totalsByCategory[cat.id],
+        amount: new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: user?.settings?.currency || "PKR",
+          maximumFractionDigits: 0,
+        }).format(totalsByCategory[cat.id] || 0),
+      };
+    })
+    .filter((item) => item.value > 0);
 
   return (
     <div className="flex min-h-screen flex-col items-center bg-white">
@@ -86,7 +126,7 @@ const HistoryScreen = () => {
           <Header title="Spent History" showBackButton />
 
           {/* Dropdown Filter */}
-          <div
+          {/* <div
             className="flex justify-center px-4 py-2 relative"
             ref={dropdownRef}
           >
@@ -116,26 +156,26 @@ const HistoryScreen = () => {
                 ))}
               </div>
             )}
-          </div>
+          </div> */}
         </div>
 
         {/* Scrollable Content */}
         <main className="flex-1 overflow-y-auto px-4 pt-4">
           {/* Save This Month */}
-          <div className="text-center mb-4">
+          {/* <div className="text-center mb-4">
             <div className="text-slate-500 text-sm mb-1">Save This Month</div>
-            <div className="text-2xl font-bold text-slate-900 mb-1">
+            <div className="text-2xl   text-slate-900 mb-1">
               $1852.00 <span className="text-base font-medium">USD</span>
             </div>
             <div className="text-slate-500 text-sm">
               Increase of{" "}
-              <span className="font-semibold text-slate-800">12%</span> from
+              <span className="  text-slate-800">12%</span> from
               last month
             </div>
-          </div>
+          </div> */}
 
           {/* Chart */}
-          <div className="relative mb-6 h-40 rounded-xl bg-white shadow p-4">
+          {/* <div className="relative mb-6 h-40 rounded-xl bg-white shadow p-4">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 data={chartData}
@@ -155,33 +195,70 @@ const HistoryScreen = () => {
                 />
               </LineChart>
             </ResponsiveContainer>
-          </div>
+          </div> */}
 
           {/* Spent History Cards */}
           <div className="mb-4">
-            <div className="text-lg font-semibold text-slate-900 mb-3">
-              Spent History
+            <div className="text-lg text-slate-900 mb-3">
+              Total Spent by Category 💸
             </div>
+            {spentHistoryData.length === 0 && (
+              <div className="text-slate-500 italic mb-2">
+                Wow, look at you! Not a single penny spent. Are you a monk or
+                just really good at hiding your expenses?
+              </div>
+            )}
             <div className="flex gap-3 overflow-x-auto pb-2">
-              {spentHistoryData.map((item, idx) => (
-                <div
-                  key={idx}
-                  className={`min-w-[130px] rounded-xl p-3 shadow ${item.color} flex flex-col`}
-                >
-                  <div className="mb-2">{item.icon}</div>
-                  <div className="font-medium text-slate-800 text-sm">
-                    {item.title}
-                  </div>
-                  <div className="text-[10px] text-slate-500 mb-1">
-                    {item.date}
-                  </div>
-                  <div className={`text-base font-bold ${item.textColor}`}>
-                    {item.amount}
-                  </div>
+              {/* Spent History Cards */}
+              <div className="mb-6">
+                <div className="flex gap-3 overflow-x-auto pb-2">
+                  {spentHistoryData.map((item, idx) => (
+                    <SpentCard key={idx} item={item} />
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
+          <div className="mb-6">
+            {/* Title */}
+            <h3 className="text-lg  text-slate-900 mb-3">
+              📊 Where Your Money Went
+            </h3>
+
+            {/* Legend Row */}
+            <div className="flex justify-between mb-2 text-sm text-slate-700">
+              <div className="flex items-center gap-1">
+                <span className="w-3 h-3 rounded-full bg-blue-500"></span>
+                🧾 Needs ({percentByType.needs}%)
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="w-3 h-3 rounded-full bg-yellow-400"></span>
+                🎉 Wants ({percentByType.wants}%)
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="w-3 h-3 rounded-full bg-green-500"></span>
+                💰 Save ({percentByType.save}%)
+              </div>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="w-full h-4 rounded-full bg-slate-200 overflow-hidden flex">
+              <div
+                className="bg-blue-500 h-full transition-all duration-700"
+                style={{ width: `${percentByType.needs}%` }}
+              />
+              <div
+                className="bg-yellow-400 h-full transition-all duration-700"
+                style={{ width: `${percentByType.wants}%` }}
+              />
+              <div
+                className="bg-green-500 h-full transition-all duration-700"
+                style={{ width: `${percentByType.save}%` }}
+              />
+            </div>
+          </div>
+          {showModal && <WisdomPreferenceModal onSelect={handleWisdomChoice} />}
+          {showWisdom && <QuoteBox showType={wisdomType} />}
         </main>
 
         <Navigation />

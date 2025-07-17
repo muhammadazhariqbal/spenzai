@@ -1,32 +1,55 @@
-import React, { useMemo } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { formatCurrency } from "../utils/categories";
-import {
-  getExpensesByCategory,
-  getCurrentMonthExpenses,
-} from "../utils/storage";
+import { AppContext } from "../utils/AppContext";
+import { capitalizeFirst } from "../utils/helpers";
 
 const ExpenseSummary = () => {
-  const monthlyExpenses = useMemo(() => getCurrentMonthExpenses(), []);
-  const categoryTotals = useMemo(() => getExpensesByCategory(), []);
-
-  const totalMonthlyExpense = useMemo(
-    () => monthlyExpenses.reduce((sum, expense) => sum + expense.amount, 0),
-    [monthlyExpenses]
-  );
-
-  // Find top 3 categories
-  const topCategories = useMemo(() => {
-    return Object.entries(categoryTotals)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 3);
-  }, [categoryTotals]);
+  const {
+    user,
+    saveUser,
+    expenses,
+    saveExpense,
+    isLoading,
+    totalSpent,
+    duration,
+    totalMonth,
+    totalWeek,
+    totalToday,
+  } = useContext(AppContext);
+  const [summary, setSummary] = useState({ totalSpent, currency: "" });
+  useEffect(() => {
+    setSummary({
+      totalSpent:
+        duration === "today"
+          ? totalToday
+          : duration === "month"
+          ? totalMonth
+          : duration === "week"
+          ? totalWeek
+          : totalSpent,
+      currency: user?.settings?.currency,
+    });
+  }, [
+    expenses,
+    user,
+    isLoading,
+    totalSpent,
+    duration,
+    totalMonth,
+    totalToday,
+    totalWeek,
+  ]);
 
   return (
     <div className="bg-black rounded-lg shadow-sm p-4 mb-2">
-      <h2 className="text-md font-semibold mb-3 text-white">This Month</h2>
+      <h2 className="text-md  mb-3 text-white">
+        {duration !== "today"
+          ? `This ${capitalizeFirst(duration)}`
+          : capitalizeFirst(duration)}
+      </h2>
 
-      <div className="text-3xl font-bold text-slate-800  text-white">
-        {formatCurrency(totalMonthlyExpense)}
+      <div className="text-3xl    text-white">
+        {formatCurrency(summary.totalSpent, user?.settings?.currency || "USD")}
       </div>
 
       {/* {topCategories.length > 0 ? (

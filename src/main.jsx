@@ -2,30 +2,17 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
+import { AppProvider } from "./utils/AppContext.jsx";
+import { registerSW } from "virtual:pwa-register";
 
-// Register service worker for PWA only if not running in StackBlitz
-if (
-  "serviceWorker" in navigator &&
-  !window.navigator.userAgent.includes("StackBlitz")
-) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/sw.js").catch((error) => {
-      console.error("Service worker registration failed:", error);
-    });
-  });
-}
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("/sw.js")
-      .then((reg) => console.log("Service worker registered", reg))
-      .catch((err) =>
-        console.error("Service worker registration failed:", err)
-      );
-  });
-}
+const updateSW = registerSW({
+  onNeedRefresh() {},
+  onOfflineReady() {},
+});
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <AppProvider>
+      <App />
+    </AppProvider>
   </StrictMode>
 );

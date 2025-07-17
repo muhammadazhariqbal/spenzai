@@ -41,13 +41,13 @@ const ProfileScreen = () => {
       <div className="flex flex-col items-center">
         {/* Avatar */}
         <div className="mb-4">
-          <div className="w-24 h-24 rounded-full bg-black text-white flex items-center justify-center text-2xl font-bold shadow">
+          <div className="w-24 h-24 rounded-full bg-black text-white flex items-center justify-center text-2xl   shadow">
             {firstName.charAt(0)}
           </div>
         </div>
 
         {/* Name + Edit */}
-        <div className="flex items-center mb-1 gap-2">
+        <div className="flex items-center mb-1 gap-2 flex-col justify-center">
           {editingName ? (
             <>
               <input
@@ -64,7 +64,7 @@ const ProfileScreen = () => {
             </>
           ) : (
             <>
-              <h2 className="text-xl font-bold text-black">{firstName}</h2>
+              <h2 className="text-xl   text-black">{firstName}</h2>
               <button
                 onClick={() => setEditingName(true)}
                 className="text-gray-500"
@@ -87,7 +87,7 @@ const ProfileScreen = () => {
         {/* Backup button */}
         <button
           onClick={handleBackup}
-          className="w-full max-w-xs rounded-full bg-black text-white py-3 text-sm font-semibold mb-4 shadow hover:bg-opacity-90 transition"
+          className="w-full max-w-xs rounded-full bg-black text-white py-3 text-sm   mb-4 shadow hover:bg-opacity-90 transition"
         >
           Backup My Data
         </button>
@@ -96,13 +96,13 @@ const ProfileScreen = () => {
         <div className="flex flex-col gap-2 w-full max-w-xs">
           <button
             onClick={() => setShowChangePIN(true)}
-            className="text-sm text-black font-semibold border border-gray-300 py-3 rounded-full hover:bg-gray-100"
+            className="text-sm text-black   border border-gray-300 py-3 rounded-full hover:bg-gray-100"
           >
             Change PIN
           </button>
           <button
             onClick={handleLogout}
-            className="w-full max-w-xs rounded-full border border-gray-300 text-gray-600 py-3 text-sm font-semibold  hover:bg-gray-100 transition"
+            className="w-full max-w-xs rounded-full border border-gray-300 text-gray-600 py-3 text-sm    hover:bg-gray-100 transition"
           >
             Logout
           </button>
@@ -129,9 +129,7 @@ const ProfileScreen = () => {
             >
               <X size={20} />
             </button>
-            <h3 className="text-lg font-semibold text-black mb-4">
-              Change PIN
-            </h3>
+            <h3 className="text-lg   text-black mb-4">Change PIN</h3>
             <input
               type="password"
               maxLength={4}
@@ -143,7 +141,7 @@ const ProfileScreen = () => {
             />
             <button
               onClick={handleChangePIN}
-              className="w-full rounded-full bg-black text-white py-2 text-sm font-semibold hover:bg-opacity-90 transition"
+              className="w-full rounded-full bg-black text-white py-2 text-sm   hover:bg-opacity-90 transition"
             >
               Save PIN
             </button>
@@ -161,15 +159,13 @@ const ProfileScreen = () => {
             >
               <X size={20} />
             </button>
-            <h3 className="text-lg font-semibold text-black mb-4">
-              Forgot PIN?
-            </h3>
+            <h3 className="text-lg   text-black mb-4">Forgot PIN?</h3>
             <p className="text-sm text-gray-600 mb-4">
               We'll send a PIN reset link to your registered email.
             </p>
             <button
               onClick={handleForgotPIN}
-              className="w-full rounded-full bg-black text-white py-2 text-sm font-semibold hover:bg-opacity-90 transition"
+              className="w-full rounded-full bg-black text-white py-2 text-sm   hover:bg-opacity-90 transition"
             >
               Send Reset Link
             </button>

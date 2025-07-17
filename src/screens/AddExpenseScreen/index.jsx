@@ -1,42 +1,77 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Calendar, Check, ChevronLeft, Delete } from "lucide-react";
-import { format } from "date-fns";
+import { format, startOfMonth, endOfMonth } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import CategoryScroller from "../../components/CategoryScroller";
-
+import { addExpense } from "../../utils/localStorage";
+import { AppContext } from "../../utils/AppContext";
+import { formatCurrency } from "../../utils/categories";
+import { Checkmark } from "react-checkmark";
 const AddExpenseScreen = () => {
   const navigate = useNavigate();
+  const { user, saveUser, expenses, saveExpense, isLoading } =
+    useContext(AppContext);
   const [step, setStep] = useState(1);
   const [amount, setAmount] = useState("0");
   const [note, setNote] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [checkShow, setCheckShow] = useState(false);
   const [date, setDate] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
+  const today = new Date();
+  const minDate = format(startOfMonth(today), "yyyy-MM-dd");
+  const maxDate = format(endOfMonth(today), "yyyy-MM-dd");
+  const handlePress = async (value) => {
+    switch (value) {
+      case "home":
+        navigate("/home");
+        break;
 
-  const handlePress = (value) => {
-    if (value === "delete") {
-      setAmount((prev) => (prev.length > 1 ? prev.slice(0, -1) : "0"));
-    } else if (value === "calendar") {
-      setShowCalendar(true);
-    } else if (value === "ok") {
-      if (step === 1 && amount !== "0") {
-        setStep(2);
-      } else if (step === 2 && selectedCategory) {
-        setStep(3);
-      } else if (step === 3) {
-        alert(`✅ Expense Added:
-Amount: $${amount}
-Category: ${selectedCategory.name}
-Note: ${note}
-Date: ${format(date, "yyyy-MM-dd")}`);
-        // Reset
-        setAmount("0");
-        setSelectedCategory(null);
-        setNote("");
-        setStep(1);
-      }
-    } else {
-      setAmount((prev) => (prev === "0" ? value : prev + value));
+      case "delete":
+        setAmount((prev) => (prev.length > 1 ? prev.slice(0, -1) : "0"));
+        break;
+
+      case "calendar":
+        setShowCalendar(true);
+        break;
+
+      case "ok":
+        if (step === 1 && amount !== "0") {
+          setStep(2);
+        } else if (step === 2 && selectedCategory) {
+          setStep(3);
+        } else if (step === 3) {
+          await saveExpense({
+            amount: parseFloat(amount),
+            category: selectedCategory.id,
+            date: format(date, "yyyy-MM-dd"),
+            note: note,
+            currency: user.settings.currency,
+          });
+          setCheckShow(true);
+
+          // Reset
+          setAmount("0");
+          setSelectedCategory(null);
+          setNote("");
+          setStep(1);
+
+          setTimeout(() => {
+            setCheckShow(false);
+          }, 1500);
+        }
+        break;
+
+      default:
+        setAmount((prev) => {
+          if (value === ".") {
+            if (prev.includes(".")) return prev; // Prevent multiple dots
+            return prev + ".";
+          }
+
+          return prev === "0" ? value : prev + value;
+        });
+        break;
     }
   };
 
@@ -52,7 +87,7 @@ Date: ${format(date, "yyyy-MM-dd")}`);
     "7",
     "8",
     "9",
-    "$",
+    "home",
     "0",
     ".",
     "",
@@ -63,47 +98,53 @@ Date: ${format(date, "yyyy-MM-dd")}`);
       {/* Header - Fixed */}
       <div className="flex items-center gap-2 p-4 border-b sticky top-0 bg-white z-10">
         <button onClick={() => navigate("/home")}>
-          <ChevronLeft className="w-6 h-6" />
+          {/* <ChevronLeft className="w-6 h-6" /> */}
         </button>
-        <h1 className="text-lg font-semibold mx-auto">Add Expense</h1>
+        <h1 className="text-lg  mx-auto">Add Expense</h1>
       </div>
 
-      {/* Scrollable Content Step-by-Step */}
-      <div className="flex-1 overflow-y-auto px-4 py-6">
-        {step === 1 && (
-          <div className="text-center">
-            <p className="text-gray-500 text-sm">Enter amount</p>
-            <h2 className="text-4xl font-bold mt-2">
-              <span className="text-gray-400 text-2xl">$</span>
-              {amount}
-            </h2>
-          </div>
-        )}
+      <div className="flex-1 overflow-y-auto ">
+        <div className="min-h-full flex flex-col items-center justify-center px-4 py-6">
+          {step === 1 && !checkShow && (
+            <div className="text-center  p-4 rounded w-full">
+              <p className="text-gray-500 text-sm">Enter amount</p>
+              <h2 className="text-4xl  mt-2">
+                <span className="text-gray-400 text-2xl">
+                  {formatCurrency(amount, user?.settings?.currency)}
+                </span>
+              </h2>
+            </div>
+          )}
+          {checkShow && (
+            <div className="absolute inset-0 z-50 pt-28 flex items-start justify-center">
+              <Checkmark />
+            </div>
+          )}
+          {step === 2 && (
+            <div className="w-full">
+              <p className="text-gray-500 text-sm text-center mb-2">
+                Choose category
+              </p>
+              <CategoryScroller
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+              />
+            </div>
+          )}
 
-        {step === 2 && (
-          <div>
-            <p className="text-gray-500 text-sm text-center mb-2">
-              Choose category
-            </p>
-            <CategoryScroller
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-            />
-          </div>
-        )}
-
-        {step === 3 && (
-          <div className="text-center">
-            <p className="text-gray-500 text-sm">Add optional note</p>
-            <input
-              type="text"
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
-              placeholder="e.g. Dinner with friends"
-              className="w-full mt-3 px-4 py-2 rounded-lg border border-gray-200 text-sm text-center"
-            />
-          </div>
-        )}
+          {step === 3 && (
+            <div className="text-center w-full">
+              <p className="text-gray-500 text-sm">Add optional note</p>
+              <input
+                type="text"
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                placeholder="e.g. Dinner with friends"
+                className="w-full mt-3 px-4 py-2 rounded-lg border border-gray-200 text-[16px] text-center"
+              />
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Keypad - Fixed */}
@@ -120,7 +161,7 @@ Date: ${format(date, "yyyy-MM-dd")}`);
                     ? "bg-cyan-200"
                     : key === "delete"
                     ? "bg-green-200"
-                    : key === "$"
+                    : key === "home"
                     ? "bg-yellow-200"
                     : "bg-gray-100"
                 }`}
@@ -129,6 +170,22 @@ Date: ${format(date, "yyyy-MM-dd")}`);
                   <Delete className="w-6 h-6" />
                 ) : key === "calendar" ? (
                   <Calendar className="w-6 h-6" />
+                ) : key === "home" ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-house-icon lucide-house"
+                  >
+                    <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+                    <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                  </svg>
                 ) : (
                   key
                 )}
@@ -150,11 +207,13 @@ Date: ${format(date, "yyyy-MM-dd")}`);
       {showCalendar && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
           <div className="bg-white rounded-xl p-6 w-[90%] max-w-sm shadow-lg">
-            <h2 className="text-center font-semibold mb-2">Select Date</h2>
+            <h2 className="text-center   mb-2">Select Date</h2>
             <input
               type="date"
               className="w-full border px-4 py-2 rounded text-sm"
               value={format(date, "yyyy-MM-dd")}
+              min={minDate}
+              max={maxDate}
               onChange={(e) => setDate(new Date(e.target.value))}
             />
             <div className="mt-4 flex justify-center">

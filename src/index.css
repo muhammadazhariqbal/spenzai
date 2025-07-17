@@ -1,10 +1,4 @@
-@font-face {
-  font-family: "ClashGrotesk";
-  src: url("../src/assets/fonts/OTF/ClashGrotesk-Medium.otf") format("opentype");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
+@import "/fonts/WEB/css/clash-grotesk.css";
 
 @tailwind base;
 @tailwind components;
@@ -20,7 +14,12 @@
 }
 
 body {
-  font-family: "ClashGrotesk", sans-serif;
+}
+html,
+body {
+  overscroll-behavior: none;
+  touch-action: manipulation;
+  font-family: "ClashGrotesk", "ClashGrotesk-Regular", sans-serif;
   @apply bg-slate-50 text-slate-800;
   background-color: white;
 }
@@ -38,7 +37,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-bold leading-tight;
+  @apply font-medium leading-tight;
 }
 
 p {

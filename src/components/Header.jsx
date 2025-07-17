@@ -21,7 +21,7 @@ const Header = ({
         </button>
       )}
 
-      <h1 className="mx-auto text-xl font-semibold text-slate-800">{title}</h1>
+      <h1 className="mx-auto text-xl  text-slate-800">{title}</h1>
 
       {showMenuButton && (
         <button

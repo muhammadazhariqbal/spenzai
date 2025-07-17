@@ -1,31 +1,41 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          "ClashGrotesk",
+          "ClashGrotesk-Regular",
+          "ClashGrotesk-Variable",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+        ],
+      },
       colors: {
-        primary: 'rgb(var(--color-primary))',
-        'primary-light': 'rgba(var(--color-primary), 0.1)',
-        secondary: 'rgb(var(--color-secondary))',
-        'secondary-light': 'rgba(var(--color-secondary), 0.1)',
-        accent: 'rgb(var(--color-accent))',
-        'accent-light': 'rgba(var(--color-accent), 0.1)',
-        success: 'rgb(var(--color-success))',
-        warning: 'rgb(var(--color-warning))',
-        error: 'rgb(var(--color-error))',
+        primary: "rgb(var(--color-primary))",
+        "primary-light": "rgba(var(--color-primary), 0.1)",
+        secondary: "rgb(var(--color-secondary))",
+        "secondary-light": "rgba(var(--color-secondary), 0.1)",
+        accent: "rgb(var(--color-accent))",
+        "accent-light": "rgba(var(--color-accent), 0.1)",
+        success: "rgb(var(--color-success))",
+        warning: "rgb(var(--color-warning))",
+        error: "rgb(var(--color-error))",
       },
       animation: {
-        'fade-in': 'fadeIn 0.5s ease-out',
-        'slide-up': 'slideUp 0.3s ease-out',
+        "fade-in": "fadeIn 0.5s ease-out",
+        "slide-up": "slideUp 0.3s ease-out",
       },
       keyframes: {
         fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
         slideUp: {
-          '0%': { transform: 'translateY(10px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
+          "0%": { transform: "translateY(10px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
         },
       },
     },

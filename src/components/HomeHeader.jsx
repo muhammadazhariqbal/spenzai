@@ -1,19 +1,19 @@
 import { Bell } from "lucide-react"; // You can use heroicons or lucide-react
-import profileImage from "../assets/profile.jpg"; // Replace with your image path
+import helloImg from "../assets/helloIcon.png";
 
-export default function HomeHeader({ name }) {
+export default function HomeHeader({}) {
   return (
     <div className="flex items-center justify-between p-4 rounded-xl bg-white ">
       {/* Left: Avatar and greeting */}
       <div className="flex items-center space-x-4">
         <img
-          src={profileImage}
+          src={helloImg}
           alt="Profile"
           className="w-10 h-10 rounded-full object-cover"
         />
         <div>
-          <p className="text-sm text-gray-600">Hello {name},</p>
-          <p className="text-lg font-semibold text-black">Welcome back</p>
+          <p className="text-sm text-gray-600">Hello, </p>
+          <p className="text-lg text-black">Welcome back</p>
         </div>
       </div>
 
