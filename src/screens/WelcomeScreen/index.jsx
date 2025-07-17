@@ -134,11 +134,11 @@ const WelcomeScreen = () => {
       {showOnboarding && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
           <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full text-black relative">
-            <h2 className="text-2xl font-bold mb-4 text-center">
+            <h2 className="text-2xl  mb-4 text-center">
               Install Spenzai on your device
             </h2>
             <div className="mb-4">
-              <p className="font-semibold mb-2">For Android (Chrome):</p>
+              <p className=" mb-2">For Android (Chrome):</p>
               <ol className="list-decimal list-inside space-y-1">
                 <li>
                   Tap the <b>three dots</b> menu in the top-right corner.
@@ -150,7 +150,7 @@ const WelcomeScreen = () => {
               </ol>
             </div>
             <div className="mb-4">
-              <p className="font-semibold mb-2">For iOS (Safari):</p>
+              <p className=" mb-2">For iOS (Safari):</p>
               <ol className="list-decimal list-inside space-y-1">
                 <li>
                   Tap the <b>Share</b> button{" "}
