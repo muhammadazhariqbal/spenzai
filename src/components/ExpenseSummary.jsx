@@ -3,7 +3,7 @@ import { formatCurrency } from "../utils/categories";
 import { AppContext } from "../utils/AppContext";
 import { capitalizeFirst } from "../utils/helpers";
 
-const ExpenseSummary = () => {
+const ExpenseSummary = ({ category }) => {
   const {
     user,
     saveUser,
@@ -47,6 +47,7 @@ const ExpenseSummary = () => {
           ? `This ${capitalizeFirst(duration)}`
           : capitalizeFirst(duration)}
       </h2>
+      <p className="text-white text-sm ">{category}</p>
 
       <div className="text-3xl    text-white">
         {formatCurrency(summary.totalSpent, user?.settings?.currency || "USD")}

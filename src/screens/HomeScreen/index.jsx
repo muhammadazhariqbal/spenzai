@@ -19,7 +19,7 @@ const HomeScreen = () => {
         {/* Header - Fixed */}
         <div className="sticky top-0 bg-white z-10 pt-4 px-4 pb-2">
           <HomeHeader />
-          <ExpenseSummary />
+          <ExpenseSummary category={selectedCategory} />
 
           {/* Category Scroll */}
           <div className="flex items-center gap-3 overflow-x-auto hide-scrollbar mt-2 pb-2">
