@@ -75,24 +75,14 @@ const HistoryScreen = () => {
   const [showWisdom, setShowWisdom] = useState(quoteType !== "none"); // show or hide box
   const [wisdomType, setWisdomType] = useState(quoteType || "all"); // default
   const [showModal, setShowModal] = useState(!quoteType); // show at first load
-  console.log(quoteType, "quoteType isee");
   const handleWisdomChoice = async (type) => {
-    console.log(type, "type qupteee");
     await handleQuoteType(type);
-    console.log(type, "type awaittt");
 
     setWisdomType(type);
     setShowModal(false);
     setShowWisdom(type !== "none");
   };
-  console.log(
-    user,
-    totalsByCategory,
-    totalsByType,
-    percentByType,
-    grandTotal,
-    "totalsByCategory, totalsByType, percentByType, grandTotal"
-  );
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -127,8 +117,6 @@ const HistoryScreen = () => {
       };
     })
     .filter((item) => item.value > 0);
-
-  console.log(spentHistoryData, "spentHistoryData");
 
   return (
     <div className="flex min-h-screen flex-col items-center bg-white">
@@ -176,12 +164,12 @@ const HistoryScreen = () => {
           {/* Save This Month */}
           {/* <div className="text-center mb-4">
             <div className="text-slate-500 text-sm mb-1">Save This Month</div>
-            <div className="text-2xl font-bold text-slate-900 mb-1">
+            <div className="text-2xl   text-slate-900 mb-1">
               $1852.00 <span className="text-base font-medium">USD</span>
             </div>
             <div className="text-slate-500 text-sm">
               Increase of{" "}
-              <span className="font-semibold text-slate-800">12%</span> from
+              <span className="  text-slate-800">12%</span> from
               last month
             </div>
           </div> */}
@@ -263,7 +251,6 @@ const HistoryScreen = () => {
               />
             </div>
           </div>
-          {console.log(wisdomType, "wisdomType")}
           {showModal && <WisdomPreferenceModal onSelect={handleWisdomChoice} />}
           {showWisdom && <QuoteBox showType={wisdomType} />}
         </main>

@@ -55,7 +55,6 @@ export const AppProvider = ({ children }) => {
     const fetchQuoteType = async () => {
       try {
         const user = await getUserLocal();
-        console.log(user, "user get user local");
         if (user?.quoteType) {
           setQuoteType(user.quoteType);
         } else {
@@ -70,12 +69,9 @@ export const AppProvider = ({ children }) => {
   }, [quoteType, user]);
 
   const handleQuoteType = async (value) => {
-    console.log(value, "value contexx");
-
     try {
       await updateUserQuoteType(value);
       setQuoteType(value);
-      console.log(value, "success contexx");
     } catch (error) {
       console.error("Failed to save quote type in user profile:", error);
     }

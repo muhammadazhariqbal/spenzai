@@ -22,7 +22,6 @@ const WelcomeScreen = () => {
   useEffect(() => {
     const checkExistingUser = async () => {
       try {
-        console.log(user, "user on check");
         if (!isLoading && user.settings?.country) {
           // User exists and has completed setup, redirect to /add
           navigate("/add");
@@ -153,7 +152,7 @@ const WelcomeScreen = () => {
             {isLoading ? (
               <>
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                <span className="text-lg font-semibold">Setting up...</span>
+                <span className="text-lg  ">Setting up...</span>
               </>
             ) : (
               <span className="text-lg ">Get Started</span>

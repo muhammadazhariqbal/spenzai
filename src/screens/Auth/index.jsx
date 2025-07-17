@@ -26,14 +26,14 @@ const AuthScreen = () => {
 
       <img src={headerimg} alt="logo" className="w-40 h-40 mb-4" />
 
-      <h2 className="text-2xl font-bold text-black mb-6">
+      <h2 className="text-2xl  text-black mb-6">
         {mode === "login" ? "Login to Continue" : "Register Your Account"}
       </h2>
 
       {/* Toggle Tabs */}
       <div className="mb-6 flex w-full max-w-xs rounded-full bg-gray-200 p-1">
         <button
-          className={`w-1/2 py-2 rounded-full text-sm font-semibold transition ${
+          className={`w-1/2 py-2 rounded-full text-sm   transition ${
             mode === "login" ? "bg-black text-white" : "text-gray-600"
           }`}
           onClick={() => setMode("login")}
@@ -41,7 +41,7 @@ const AuthScreen = () => {
           Login
         </button>
         <button
-          className={`w-1/2 py-2 rounded-full text-sm font-semibold transition ${
+          className={`w-1/2 py-2 rounded-full text-sm   transition ${
             mode === "register" ? "bg-black text-white" : "text-gray-600"
           }`}
           onClick={() => setMode("register")}
@@ -77,7 +77,7 @@ const AuthScreen = () => {
 
         <button
           type="submit"
-          className="w-full rounded-full bg-black text-white py-3 font-semibold text-sm hover:bg-opacity-90 transition"
+          className="w-full rounded-full bg-black text-white py-3   text-sm hover:bg-opacity-90 transition"
         >
           {mode === "login" ? "Login" : "Register"}
         </button>

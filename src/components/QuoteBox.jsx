@@ -12,7 +12,7 @@ const QuoteBox = ({ showType = "all" }) => {
 
   return (
     <div className="mt-6 mb-6 p-4 bg-slate-50 rounded-xl border text-sm text-slate-700 italic">
-      💡 <span className="font-semibold">Finance Wisdom:</span>
+      💡 <span className=" ">Finance Wisdom:</span>
       <br />“{randomQuote.quote}”<br />
       <span className="text-xs text-slate-500">— {randomQuote.source}</span>
     </div>

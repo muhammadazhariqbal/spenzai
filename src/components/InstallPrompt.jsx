@@ -32,7 +32,6 @@ const InstallPrompt = () => {
     if (deferredPrompt) {
       deferredPrompt.prompt();
       const { outcome } = await deferredPrompt.userChoice;
-      console.log("User install choice:", outcome);
       setShowAndroidPrompt(false);
       setDeferredPrompt(null);
     }
@@ -44,8 +43,8 @@ const InstallPrompt = () => {
     <div className="fixed bottom-4 left-0 right-0 flex justify-center z-50 px-4">
       <div className="bg-black text-white px-5 py-3 rounded-xl shadow-lg flex items-center gap-4 max-w-md w-full">
         <div className="text-sm">
-          Install Spenzai: Tap <span className="font-semibold">Share</span> →{" "}
-          <span className="font-semibold">Add to Home Screen</span>
+          Install Spenzai: Tap <span className=" ">Share</span> →{" "}
+          <span className=" ">Add to Home Screen</span>
         </div>
       </div>
     </div>

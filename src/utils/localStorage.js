@@ -88,7 +88,6 @@ export const updateExpense = async (updatedExpense) => {
 export const deleteExpenseLocal = async (id) => {
   try {
     await expenses.removeItem(id);
-    console.log("Expense deleted:", id);
   } catch (err) {
     console.error("Error deleting expense:", err);
   }
@@ -98,7 +97,6 @@ export const deleteExpenseLocal = async (id) => {
  * Get total expenses amount
  */
 export const getTotalExpenses = async (all) => {
-  console.log(all, "all data");
   return all.reduce((sum, e) => sum + Number(e.amount || 0), 0);
 };
 

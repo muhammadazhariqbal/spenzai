@@ -137,7 +137,7 @@ const LandingPage = () => {
     <div className="text-black bg-white font-sans px-6 py-8 max-w-3xl mx-auto">
       {/* Hero */}
       <section className="text-center mb-12">
-        <h1 className="text-3xl font-bold mb-4">{sections[0].title}</h1>
+        <h1 className="text-3xl mb-4">{sections[0].title}</h1>
         <p className="text-gray-600 mb-6">{sections[0].description}</p>
         <div className="flex gap-3 justify-center">
           {/* {sections[0].buttons.map((btn) => (
@@ -153,11 +153,11 @@ const LandingPage = () => {
 
       {/* Why Spenzai */}
       <section className="mb-12">
-        <h2 className="text-xl font-bold mb-4">{sections[1].title}</h2>
+        <h2 className="text-xl  mb-4">{sections[1].title}</h2>
         <div className="grid gap-4">
           {sections[1].items.map(({ emoji, title, text }) => (
             <div key={title} className="p-4 border rounded-md">
-              <h3 className="font-semibold">
+              <h3 className=" ">
                 {emoji} {title}
               </h3>
               <p className="text-sm text-gray-600">{text}</p>
@@ -168,15 +168,15 @@ const LandingPage = () => {
 
       {/* How It Works */}
       <section className="mb-12">
-        <h2 className="text-xl font-bold mb-4">{sections[2].title}</h2>
+        <h2 className="text-xl   mb-4">{sections[2].title}</h2>
         <ol className="space-y-4">
           {sections[2].steps.map(({ number, title, text }) => (
             <li key={title} className="flex items-start gap-3">
-              <div className="w-6 h-6 flex items-center justify-center bg-black text-white rounded-full text-xs font-bold">
+              <div className="w-6 h-6 flex items-center justify-center bg-black text-white rounded-full text-xs  ">
                 {number}
               </div>
               <div>
-                <h4 className="font-semibold">{title}</h4>
+                <h4 className=" ">{title}</h4>
                 <p className="text-sm text-gray-600">{text}</p>
               </div>
             </li>
@@ -186,7 +186,7 @@ const LandingPage = () => {
 
       {/* Testimonials */}
       <section className="mb-12">
-        <h2 className="text-xl font-bold mb-4">{sections[3].title}</h2>
+        <h2 className="text-xl   mb-4">{sections[3].title}</h2>
         <div className="space-y-4">
           {sections[3].quotes.map(({ text, name }) => (
             <blockquote
@@ -201,7 +201,7 @@ const LandingPage = () => {
 
       {/* Features */}
       <section className="mb-12">
-        <h2 className="text-xl font-bold mb-4">{sections[4].title}</h2>
+        <h2 className="text-xl   mb-4">{sections[4].title}</h2>
         <ul className="list-disc pl-6 text-gray-600 text-sm">
           {sections[4].list.map((item) => (
             <li key={item}>{item}</li>
@@ -211,7 +211,7 @@ const LandingPage = () => {
 
       {/* Coming Soon */}
       <section className="mb-12">
-        <h2 className="text-xl font-bold mb-4">{sections[5].title}</h2>
+        <h2 className="text-xl   mb-4">{sections[5].title}</h2>
         <ul className="list-disc pl-6 text-gray-600 text-sm">
           {sections[5].list.map((item) => (
             <li key={item}>{item}</li>
@@ -221,12 +221,12 @@ const LandingPage = () => {
 
       {/* Call to Action */}
       <section className="text-center my-12">
-        <h2 className="text-2xl font-semibold mb-2">Start Today</h2>
+        <h2 className="text-2xl   mb-2">Start Today</h2>
         <p className="text-sm text-gray-600 mb-4">Free. Simple. Effective.</p>
         <button
           data-umami-event="Start Tracking Now Click"
           onClick={() => navigate("/")}
-          className="bg-black text-white px-6 py-2 rounded-full font-semibold hover:scale-105 transition"
+          className="bg-black text-white px-6 py-2 rounded-full   hover:scale-105 transition"
         >
           Start Tracking Now
         </button>

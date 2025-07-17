@@ -207,7 +207,7 @@ const AddExpenseScreen = () => {
       {showCalendar && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
           <div className="bg-white rounded-xl p-6 w-[90%] max-w-sm shadow-lg">
-            <h2 className="text-center font-semibold mb-2">Select Date</h2>
+            <h2 className="text-center   mb-2">Select Date</h2>
             <input
               type="date"
               className="w-full border px-4 py-2 rounded text-sm"

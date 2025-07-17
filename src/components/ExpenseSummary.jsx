@@ -17,9 +17,7 @@ const ExpenseSummary = () => {
     totalToday,
   } = useContext(AppContext);
   const [summary, setSummary] = useState({ totalSpent, currency: "" });
-  console.log(totalMonth, totalWeek, totalToday, duration);
   useEffect(() => {
-    console.log(duration, "duration on con");
     setSummary({
       totalSpent:
         duration === "today"
@@ -42,7 +40,6 @@ const ExpenseSummary = () => {
     totalWeek,
   ]);
 
-  console.log("duration ", duration);
   return (
     <div className="bg-black rounded-lg shadow-sm p-4 mb-2">
       <h2 className="text-md  mb-3 text-white">
@@ -51,7 +48,7 @@ const ExpenseSummary = () => {
           : capitalizeFirst(duration)}
       </h2>
 
-      <div className="text-3xl font-semibold  text-white">
+      <div className="text-3xl    text-white">
         {formatCurrency(summary.totalSpent, user?.settings?.currency || "USD")}
       </div>
 

@@ -43,7 +43,7 @@ const ExpenseItem = ({ expense, onClick }) => {
       </div>
 
       <div className="text-right">
-        <span className="font-semibold text-slate-800">
+        <span className="  text-slate-800">
           {formatCurrency(expense.amount)}
         </span>
       </div>
