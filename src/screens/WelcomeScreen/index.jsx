@@ -188,7 +188,7 @@ const WelcomeScreen = () => {
             v{typeof __APP_VERSION__ !== "undefined" ? __APP_VERSION__ : "dev"}
           </div>
           <h1 className="mb-2 text-4xl text-left mt-10 text-black">
-            Easy ways to manage your expenses
+            Know where your money goes
           </h1>
           <button
             className="w-[98%] mt-6 flex items-center justify-center space-x-2 bg-black text-white px-8 py-4 rounded-full transition-all duration-300"

@@ -6,19 +6,112 @@
     <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#131313" />
+
+    <!-- SEO Meta Tags -->
+    <title>
+      Spenzai - Free Expense Tracker & Budget App | Simple Money Management
+    </title>
     <meta
       name="description"
-      content="Track your expenses with this simple PWA"
+      content="Track expenses easily with Spenzai, the best free personal finance app. Simple budget tracking, spending insights, and mindful money management. Works offline, completely free forever."
     />
+    <meta
+      name="keywords"
+      content="expense tracker, budget app, personal finance app, free expense tracker, money management app, spending tracker, budget planner, Islamic finance app, mindful spending, offline budget tracker"
+    />
+    <meta name="author" content="Spenzai" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Spenzai - Free Expense Tracker That Actually Works"
+    />
+    <meta
+      property="og:description"
+      content="Simple expense tracking in just 2 taps. Free forever, works offline, keeps data private. The only budget app you'll actually use."
+    />
+    <meta property="og:url" content="https://spenzai.com" />
+    <meta
+      property="og:image"
+      content="https://spenzai.com/public/logo-pwa.png"
+    />
+    <meta property="og:site_name" content="Spenzai" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Spenzai - Free Expense Tracker That Actually Works"
+    />
+    <meta
+      name="twitter:description"
+      content="Simple expense tracking in just 2 taps. Free forever, works offline, keeps data private."
+    />
+    <meta
+      name="twitter:image"
+      content="https://spenzai.com/public/logo-pwa.png"
+    />
+
+    <!-- PWA Meta Tags -->
     <link rel="apple-touch-icon" href="/public/logo-pwa.png" />
     <link rel="manifest" href="/manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Spenzai" />
+
+    <!-- Canonical URL (update with your actual domain) -->
+    <link rel="canonical" href="https://spenzai.com" />
+
+    <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <title>Spenzai</title>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Spenzai",
+        "description": "Free expense tracker and budget app for simple money management with Islamic finance principles",
+        "url": "https://spenzai.com",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web, iOS, Android",
+        "browserRequirements": "HTML5, JavaScript",
+        "softwareVersion": "1.0",
+        "datePublished": "2024-01-01",
+        "author": {
+          "@type": "Organization",
+          "name": "Spenzai"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
+        "featureList": [
+          "Expense tracking",
+          "Budget management",
+          "Spending insights",
+          "Offline functionality",
+          "Islamic finance principles",
+          "Cross-platform support",
+          "Privacy-focused data storage"
+        ],
+        "screenshot": "https://spenzai.com/public/logo-pwa.png"
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

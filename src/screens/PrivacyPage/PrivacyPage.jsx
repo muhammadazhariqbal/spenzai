@@ -23,8 +23,8 @@ const PrivacyPolicy = () => {
 
       <h2 className="text-lg   mt-6 mb-2">What I Collect</h2>
       <p className="mb-4">
-        By default, <strong>I collect nothing</strong>. All your expense data
-        stays <strong>on your device</strong>.
+        By default, I collect nothing. All your expense data stays on your
+        device.
       </p>
       <p className="mb-4">
         If you enable features like quote preferences or monthly email reports,
