@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
-import sideIcon from "../assets/side-icon.png";
+import sideIcon from "../../public/images/side-icon.png";
 import { AppContext } from "../utils/AppContext";
 import { capitalizeFirst, isDateMatchFilter } from "../utils/helpers";
 import HoldableItem from "./HoldableItem";

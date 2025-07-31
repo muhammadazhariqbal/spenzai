@@ -42,8 +42,8 @@ const UnderConstruction = () => {
           🚧 Profile Under Construction
         </h1>
         <p className="text-sm text-slate-500">
-          We're working on some cool features for you. Meanwhile, you can manage
-          your data below:
+          Working on some cool features for you. Meanwhile, you can manage your
+          data below:
         </p>
 
         {/* Action Buttons */}
@@ -82,6 +82,16 @@ const UnderConstruction = () => {
             Reset Quote Preference
           </button>
         </div>
+        <p className="text-gray-600 mb-4">
+          Have questions or feedback? Feel free to reach out at{" "}
+          <a
+            href="mailto:azhar@spenzai.com"
+            className="text-blue-600 underline"
+          >
+            azhar@spenzai.com
+          </a>
+          .
+        </p>
       </div>
 
       {/* Backup Modal */}
