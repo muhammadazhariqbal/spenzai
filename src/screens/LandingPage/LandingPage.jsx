@@ -1,6 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import one from "../../assets/1.png";
+import two from "../../assets/2.png";
+import three from "../../assets/3.png";
+import four from "../../assets/4.png";
+import five from "../../assets/5.png";
 const sections = [
   {
     id: "hero",
@@ -182,6 +186,41 @@ const LandingPage = () => {
             </li>
           ))}
         </ol>
+      </section>
+      <section className="mb-12">
+        <h2 className="text-xl mb-4 text-center">Clean & Simple UI</h2>
+        <div className="flex gap-4 overflow-x-auto px-2">
+          <img
+            key={"5"}
+            src={five}
+            alt={`Screenshot ${5}`}
+            className="w-64 h-auto flex-shrink-0 rounded-xl border shadow"
+          />
+          <img
+            key={"1"}
+            src={one}
+            alt={`Screenshot ${1}`}
+            className="w-64 h-auto flex-shrink-0 rounded-xl border shadow"
+          />
+          <img
+            key={"2"}
+            src={two}
+            alt={`Screenshot ${2}`}
+            className="w-64 h-auto flex-shrink-0 rounded-xl border shadow"
+          />
+          <img
+            key={"3"}
+            src={three}
+            alt={`Screenshot ${3}`}
+            className="w-64 h-auto flex-shrink-0 rounded-xl border shadow"
+          />
+          <img
+            key={"4"}
+            src={four}
+            alt={`Screenshot ${4}`}
+            className="w-64 h-auto flex-shrink-0 rounded-xl border shadow"
+          />
+        </div>
       </section>
 
       {/* Testimonials */}
