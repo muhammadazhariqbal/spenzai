@@ -1,5 +1,5 @@
 import { Bell } from "lucide-react"; // You can use heroicons or lucide-react
-import helloImg from "../assets/helloIcon.png";
+import helloImg from "../../public/images/helloIcon.png";
 
 export default function HomeHeader({}) {
   return (

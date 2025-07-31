@@ -42,49 +42,56 @@ const UnderConstruction = () => {
           🚧 Profile Under Construction
         </h1>
         <p className="text-sm text-slate-500">
-          We're working on some cool features for you. Meanwhile, you can manage
-          your data below:
+          Working on some cool features for you. Meanwhile, you can manage your
+          data below:
         </p>
 
         {/* Action Buttons */}
         <div className="flex flex-col gap-4">
           <button
-            data-umami-event="Subscribe Monthly Report"
+            data-umami-event="Backup Data Click"
             onClick={() => setShowBackupModal(true)}
-            className="px-4 py-2 bg-black text-white rounded-full text-sm hover:scale-105 transition"
+            className="bg-slate-900 text-white px-6 py-3 rounded-full text-md  "
           >
-            📩 Subscribe for Monthly Report
+            Subscribe for Monthly Report
           </button>
           <button
             data-umami-event="Backup Data Click"
             onClick={() => setShowBackupModal(true)}
-            className="bg-slate-900 text-white px-6 py-3 rounded-full text-md  hover:scale-105 transition"
+            className="bg-slate-900 text-white px-6 py-3 rounded-full text-md  "
           >
             Backup Data
           </button>
+
+          <button
+            onClick={() => setShowBackupModal(true)}
+            className="bg-slate-900 text-white px-6 py-3 rounded-full text-md  "
+          >
+            Change Language
+          </button>
           <button
             onClick={() => setShowResetModal(true)}
-            className="bg-red-600 text-white px-6 py-3 rounded-full text-md  hover:scale-105 transition"
+            className="bg-red-600 text-white px-6 py-3 rounded-full text-md  "
           >
             Reset All Data
           </button>
           <button
-            data-umami-event="Change Language Click"
-            onClick={() => setShowBackupModal(true)}
-            className="text-sm text-slate-900 underline"
+            onClick={handleResetQuoteType}
+            className="bg-red-600 text-white px-6 py-3 rounded-full text-md  "
           >
-            🌍 Change Language
+            Reset Quote Preference
           </button>
         </div>
-
-        {/* Reset Quote Button */}
-        <button
-          data-umami-event="Reset Quote Preference Click"
-          onClick={handleResetQuoteType}
-          className="text-sm text-red-500 underline"
-        >
-          Reset Quote Preference
-        </button>
+        <p className="text-gray-600 mb-4">
+          Have questions or feedback? Feel free to reach out at{" "}
+          <a
+            href="mailto:azhar@spenzai.com"
+            className="text-blue-600 underline"
+          >
+            azhar@spenzai.com
+          </a>
+          .
+        </p>
       </div>
 
       {/* Backup Modal */}

@@ -4,94 +4,97 @@ import { useNavigate } from "react-router-dom";
 const sections = [
   {
     id: "hero",
-    title: "2 taps a day keep the broke away",
+    title: "Free Expense Tracker App - 2 Taps a Day Keep the Broke Away",
     description:
-      "All it takes is a quick add, Spenzai keeps your spending in check",
-    buttons: ["Get Started Free"],
+      "Simple budget tracking made easy. Spenzai is the best free personal finance app to track your spending, manage your budget, and build mindful money habits",
+    buttons: ["Start Tracking Expenses Free"],
   },
   {
     id: "why",
-    title: "Why Spenzai?",
+    title: "Why Choose Spenzai Expense Tracker?",
     items: [
       {
         emoji: "🎯",
-        title: "Simple, Not Stupid",
-        text: "No overwhelming features. Just what you need to track expenses and see where your money goes.",
+        title: "Simple Expense Tracking, Not Overwhelming",
+        text: "No complex budgeting features you'll never use. Just intuitive expense tracking to see where your money goes with clear spending insights.",
       },
       {
         emoji: "💰",
-        title: "Free Forever",
-        text: "No subscriptions. No hidden fees. No premium features. Just a free app that works.",
+        title: "Completely Free Budget App Forever",
+        text: "No subscriptions. No hidden fees. No premium features locked away. Just a free expense tracker that actually works.",
       },
       {
         emoji: "📱",
-        title: "Works Everywhere",
-        text: "Install on your phone, tablet, or computer. Works offline. Your data stays private.",
+        title: "Cross-Platform Money Management App",
+        text: "Install on your phone, tablet, or computer. Works offline for expense tracking. Your financial data stays completely private.",
       },
       {
         emoji: "🕌",
-        title: "Mindful Spending",
-        text: "Get gentle reminders about Islamic finance principles and ethical spending habits.",
+        title: "Mindful & Ethical Spending Tracker",
+        text: "Get gentle reminders about mindful spending, ethical money management, and optional Islamic finance principles for conscious financial decisions.",
       },
     ],
   },
   {
     id: "how",
-    title: "How It Works",
+    title: "How to Track Expenses with Spenzai",
     steps: [
       {
         number: 1,
-        title: "Add Your Expense",
-        text: "Tap the + button, enter amount, choose category, add a note. Done.",
+        title: "Quick Expense Entry & Categorization",
+        text: "Tap the + button, enter amount, choose from 15+ expense categories, add a note. Lightning-fast expense logging in seconds.",
       },
       {
         number: 2,
-        title: "See Your Patterns",
-        text: "View spending by category, day, week, or month. Understand your habits.",
+        title: "Spending Analysis & Budget Insights",
+        text: "View detailed spending patterns by category, day, week, or month. Understand your financial habits with visual expense reports.",
       },
       {
         number: 3,
-        title: "Stay Motivated",
-        text: "Get daily wisdom quotes about mindful spending and financial wellness.",
+        title: "Financial Motivation & Money Wisdom",
+        text: "Get daily wisdom quotes about mindful spending, budgeting tips, and financial wellness to stay motivated on your money journey.",
       },
     ],
   },
   {
     id: "testimonials",
-    title: "What People Say",
+    title: "What Users Say About Our Expense Tracker",
     quotes: [
       {
-        text: "Finally, an expense tracker that doesn't make me feel overwhelmed. Simple and actually useful.",
+        text: "Finally found a free expense tracker that doesn't overwhelm me with features I don't need. Simple, clean, and helps me understand my spending habits.",
         name: "Ahmed",
       },
       {
-        text: "I was using notes app before. This is so much better and it's free!",
+        text: "Switched from using my notes app to track expenses. Spenzai's budget tracking is so much better organized and it's completely free!",
         name: "Ayesha",
       },
       {
-        text: "Love the Islamic finance quotes. Reminds me to spend mindfully.",
+        text: "Love the Islamic finance quotes in this expense tracker. Reminds me to spend mindfully according to my values while managing my budget.",
         name: "Omar",
       },
     ],
   },
   {
     id: "features",
-    title: "Features That Matter",
+    title: "Essential Expense Tracker Features",
     list: [
-      "15 Smart Categories - Food, transport, shopping, and more",
-      "Real-time Insights - See your spending patterns instantly",
-      "Offline Works - No internet needed",
-      "Private - Your data stays on your device",
-      "Install as App - Works like a native app on any device",
+      "Quick Expense Logging - Add amount, category, and note in seconds to stay on top of your spending",
+      "Smart Budget Categories - Needs, wants, and savings breakdown for better financial decisions",
+      "Daily to Yearly Tracking - See totals by day, week, month, or year to monitor habits easily",
+      "Last Month's Report - Automatically view your full summary from the previous month",
+      "Offline Expense Tracking - Log expenses without internet; perfect for travel or remote areas",
+      "Private Data - Your financial data stays on your device",
+      "Install as Native App - Works like a real app on mobile, tablet, or desktop (PWA support)",
+      "Optional Wisdom Quotes - Get inspired by financial tips and quotes you can toggle on/off",
     ],
   },
   {
     id: "coming",
-    title: "Coming Soon",
+    title: "Upcoming Expense Tracker Features",
     list: [
-      "Multi-Language Support - English, Arabic, Urdu, and more",
-      "Monthly Email Reports - Get a detailed spending summary delivered to your inbox",
-      "Data Backup - Backup and restore your data easily",
+      "Multi-Language Budget App - English, Urdu, Arabic, and more for global expense tracking",
+      "Monthly Expense Email Reports - Get spending summaries and trends sent to your inbox",
+      "Secure Cloud Backup - Backup and restore your data while keeping it fully private",
     ],
   },
 ];
@@ -105,10 +108,7 @@ const Footer = () => (
       <a href="https://github.com/muhammadazhariqbal">GitHub</a>
     </div>
     <div className="mt-4 text-gray-500 text-sm">
-      <p>
-        <strong>Muhammad Azhar Iqbal</strong> — Built Spenzai for simpler
-        expense tracking.
-      </p>
+      <p>Muhammad Azhar Iqbal — Built Spenzai for simpler expense tracking.</p>
       <p>
         <a
           href="https://www.linkedin.com/in/muhammadazhariqbal/"

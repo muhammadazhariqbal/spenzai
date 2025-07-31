@@ -3,7 +3,7 @@ import { formatCurrency } from "../utils/categories";
 import { AppContext } from "../utils/AppContext";
 import { capitalizeFirst } from "../utils/helpers";
 
-const ExpenseSummary = () => {
+const ExpenseSummary = ({ category }) => {
   const {
     user,
     saveUser,
@@ -17,28 +17,40 @@ const ExpenseSummary = () => {
     totalToday,
   } = useContext(AppContext);
   const [summary, setSummary] = useState({ totalSpent, currency: "" });
+
   useEffect(() => {
+    if (!expenses || !user) return;
+
+    const now = new Date();
+    let startDate = null;
+
+    if (duration === "today") {
+      startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    } else if (duration === "week") {
+      const dayOfWeek = now.getDay(); // 0 (Sun) to 6 (Sat)
+      const diff = now.getDate() - dayOfWeek;
+      startDate = new Date(now.getFullYear(), now.getMonth(), diff);
+    } else if (duration === "month") {
+      startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+    }
+
+    const filteredExpenses = expenses.filter((e) => {
+      const expenseDate = new Date(e.date);
+      const matchCategory = category === "all" || e.category === category;
+      const matchDate = !startDate || expenseDate >= startDate;
+      return matchCategory && matchDate;
+    });
+
+    const totalFiltered = filteredExpenses.reduce(
+      (acc, curr) => acc + curr.amount,
+      0
+    );
+
     setSummary({
-      totalSpent:
-        duration === "today"
-          ? totalToday
-          : duration === "month"
-          ? totalMonth
-          : duration === "week"
-          ? totalWeek
-          : totalSpent,
+      totalSpent: totalFiltered,
       currency: user?.settings?.currency,
     });
-  }, [
-    expenses,
-    user,
-    isLoading,
-    totalSpent,
-    duration,
-    totalMonth,
-    totalToday,
-    totalWeek,
-  ]);
+  }, [expenses, user, duration, category]);
 
   return (
     <div className="bg-black rounded-lg shadow-sm p-4 mb-2">
@@ -47,6 +59,7 @@ const ExpenseSummary = () => {
           ? `This ${capitalizeFirst(duration)}`
           : capitalizeFirst(duration)}
       </h2>
+      <p className="text-white text-sm ">{category}</p>
 
       <div className="text-3xl    text-white">
         {formatCurrency(summary.totalSpent, user?.settings?.currency || "USD")}
