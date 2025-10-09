@@ -16,55 +16,22 @@ const PrivacyPolicy = () => {
 
       <h1 className="text-2xl   mb-4">Privacy Policy</h1>
 
-      <p className="mb-4">
-        Your privacy matters to me. Spenzai is built to respect your data —
-        simple, clear, and secure.
-      </p>
+      <p className="mb-4">Last Updated: October 10, 2025</p>
 
-      <h2 className="text-lg   mt-6 mb-2">What I Collect</h2>
       <p className="mb-4">
-        By default, I collect nothing. All your expense data stays on your
-        device.
-      </p>
-      <p className="mb-4">
-        If you enable features like quote preferences or monthly email reports,
-        I may store only what’s necessary — such as your email or quote type.
-      </p>
-
-      <h2 className="text-lg   mt-6 mb-2">I Don’t:</h2>
-      <ul className="list-disc pl-5 mb-4">
-        <li>Track you</li>
-        <li>Sell your data</li>
-        <li>Share anything with third parties</li>
-      </ul>
-
-      <h2 className="text-lg   mt-6 mb-2">Offline First</h2>
-      <p className="mb-4">
-        Spenzai works offline. Your data is saved locally using your browser’s
-        storage. No internet required.
-      </p>
-
-      <h2 className="text-lg   mt-6 mb-2">Backup (Coming Soon)</h2>
-      <p className="mb-4">
-        When backup is available, you’ll control everything. Nothing will be
-        backed up unless you choose to.
-      </p>
-
-      <h2 className="text-lg   mt-6 mb-2">Monthly Reports (Coming Soon)</h2>
-      <p className="mb-4">
-        If you subscribe, I’ll only use your email to send your reports. No
-        spam. Ever.
+        Your data stays on your device. I don't collect it, store it, see it, or
+        sell it. That's the whole privacy policy.
       </p>
 
       <h2 className="text-lg   mt-6 mb-2">Questions?</h2>
-      <p>
-        Email me at{" "}
+      <p className="text-center mt-6">
+        Need help or want to collaborate?{" "}
         <a
           href="mailto:azhar@spenzai.com"
           data-umami-event="Support Email Click"
-          className="text-blue-600 underline"
+          className="text-lg"
         >
-          azhar@spenzai.com
+          Contact Me
         </a>
       </p>
     </div>
